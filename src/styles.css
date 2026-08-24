@@ -218,3 +218,17 @@
 @utility rule-hairline {
   border-top: 1px solid var(--color-border);
 }
+
+/* 弹幕式摘录轨道 */
+@keyframes danmaku-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@utility danmaku-track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  animation: danmaku-drift linear infinite;
+  will-change: transform;
+}
