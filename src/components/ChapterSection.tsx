@@ -12,6 +12,7 @@ type Props = {
 
 export function ChapterSection({ chapter, children, first = false }: Props) {
   const root = useRef<HTMLElement>(null);
+  const Heading = first ? "h1" : "h2";
 
   useEffect(() => {
     const el = root.current;
@@ -74,7 +75,7 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
         <figure
           data-image-reveal
-          className={`editorial-figure group relative lg:col-span-7 ${chapter.align === "image-right" ? "lg:order-2" : ""}`}
+          className={`editorial-figure group relative lg:col-span-7 ${chapter.align === "image-right" ? "order-2 lg:order-2" : ""}`}
         >
           <div className={`overflow-hidden bg-muted ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}>
             <img
@@ -91,15 +92,15 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
           </figcaption>
         </figure>
 
-        <div className={`relative lg:col-span-5 ${chapter.align === "image-right" ? "lg:order-1 lg:pr-8" : "lg:pl-8"}`}>
+        <div className={`relative lg:col-span-5 ${chapter.align === "image-right" ? "order-1 lg:order-1 lg:pr-8" : "lg:pl-8"}`}>
           <div data-anim className="mb-8 flex items-center gap-4">
             <span className="font-display text-3xl italic text-primary">{chapter.index}.</span>
             <span className="h-px w-12 bg-primary" />
             <span className="text-[0.65rem] uppercase text-muted-foreground">{chapter.label}</span>
           </div>
-          <h2 data-anim data-drift className={first ? "text-5xl leading-[1.05] md:text-7xl" : "text-4xl leading-tight md:text-6xl"}>
+          <Heading data-anim data-drift className={first ? "text-5xl leading-[1.05] md:text-7xl" : "text-4xl leading-tight md:text-6xl"}>
             {chapter.headline}
-          </h2>
+          </Heading>
           <p data-anim className="mt-8 max-w-md text-base leading-loose text-foreground/75 md:text-lg">{chapter.line}</p>
           <div data-anim className="mt-10 flex items-start gap-6 border-t border-border pt-6">
             <strong className="font-display text-5xl font-normal text-primary">{chapter.stat.value}</strong>
