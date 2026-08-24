@@ -142,3 +142,13 @@ export const notes: MemoirPage = {
   ],
   next: { to: "/journey", label: "学习轨迹" },
 };
+
+// 阅读顺序：用于上一篇/下一篇导航
+export const allPages: MemoirPage[] = [journey, dialogues, growth, notes];
+
+export function prevOf(page: MemoirPage) {
+  const i = allPages.findIndex((p) => p.slug === page.slug);
+  const prev = allPages[(i - 1 + allPages.length) % allPages.length];
+  return { to: prev.slug, label: prev.title };
+}
+
