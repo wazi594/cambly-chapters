@@ -19,6 +19,8 @@ export type Chapter = {
   tint: [number, number, number];
   /** 章节暗色，颜料的沉积与阴影（0-1 RGB） */
   deep: [number, number, number];
+  /** 图片处理：image 正常显示，placeholder 保留版面留白，none 完全移除 */
+  media?: "image" | "placeholder" | "none";
   /** 图片进场方式，逐章不同 */
   reveal: "wipe" | "curtain" | "iris" | "slats" | "tilt";
   image: string;
@@ -71,6 +73,7 @@ export const chapters: Chapter[] = [
     tint: [0.90, 0.87, 0.78],
     deep: [0.40, 0.50, 0.42],
     reveal: "slats",
+    media: "placeholder",
     image: notesImage,
     imageAlt: "英语学习笔记、耳机与地图碎片",
     figure: "FIG. 02 — A LINE IN TIME",
@@ -87,6 +90,7 @@ export const chapters: Chapter[] = [
     tint: [0.85, 0.88, 0.92],
     deep: [0.30, 0.38, 0.55],
     reveal: "iris",
+    media: "none",
     image: deskImage,
     imageAlt: "远程对话中的电脑与摊开的学习笔记",
     figure: "FIG. 03 — VOICES KEPT",
@@ -103,6 +107,7 @@ export const chapters: Chapter[] = [
     tint: [0.94, 0.90, 0.82],
     deep: [0.52, 0.60, 0.48],
     reveal: "tilt",
+    media: "placeholder",
     image: learnerImage,
     imageAlt: "在自然光下进行线上交流的学习者",
     figure: "FIG. 04 — BEYOND LANGUAGE",
