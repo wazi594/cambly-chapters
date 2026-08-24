@@ -120,6 +120,8 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
   }, [chapter.tint, chapter.deep, chapter.reveal, chapter.align]);
 
 
+  const media = chapter.media ?? "image";
+
   return (
     <section
       ref={root}
@@ -127,23 +129,28 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
       className="relative flex min-h-screen scroll-mt-20 items-center border-t border-border/70 px-6 py-24 md:px-12 lg:py-32"
     >
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        {media === "none" ? null : (
         <figure
           className={`editorial-figure group relative lg:col-span-7 ${chapter.align === "image-right" ? "order-2 lg:order-2" : ""}`}
         >
           <div
             data-image-reveal
-            className={`relative overflow-hidden bg-muted ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}
+            className={`relative overflow-hidden bg-muted/40 ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}
           >
-            <img
-              data-image
-              src={chapter.image}
-              alt={chapter.imageAlt}
-              width={first ? 1600 : 1200}
-              height={first ? 900 : 1500}
-              loading={first ? "eager" : "lazy"}
-              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
-            />
-            {chapter.reveal === "slats" ? (
+            {media === "image" ? (
+              <img
+                data-image
+                src={chapter.image}
+                alt={chapter.imageAlt}
+                width={first ? 1600 : 1200}
+                height={first ? 900 : 1500}
+                loading={first ? "eager" : "lazy"}
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
+              />
+            ) : (
+              <div aria-hidden className="h-full w-full border border-dashed border-border/70" />
+            )}
+            {media === "image" && chapter.reveal === "slats" ? (
               <div aria-hidden className="pointer-events-none absolute inset-0 flex">
                 {[0, 1, 2, 3, 4].map((i) => (
                   <span key={i} data-slat className="h-full flex-1 origin-top scale-y-0 bg-background" />
@@ -156,8 +163,10 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
             <span>{chapter.figure}</span><span>GRAIN 400 / ARCHIVE</span>
           </figcaption>
         </figure>
+        )}
 
-        <div className={`relative lg:col-span-5 ${chapter.align === "image-right" ? "order-1 lg:order-1 lg:pr-8" : "lg:pl-8"}`}>
+        <div className={`relative ${media === "none" ? "lg:col-span-12" : "lg:col-span-5"} ${chapter.align === "image-right" ? "order-1 lg:order-1 lg:pr-8" : "lg:pl-8"}`}>
+
           <div data-anim className="mb-8 flex items-center gap-4">
             <span className="font-display text-3xl italic text-primary">{chapter.index}.</span>
             <span className="h-px w-12 bg-primary" />

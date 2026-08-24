@@ -40,14 +40,8 @@ function Index() {
         </Suspense>
       </ClientOnly>
       <div className="grain-overlay" />
-      <header className="sticky top-0 z-20 border-b border-border/70 bg-background/80 px-6 backdrop-blur-md md:px-12">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <a href="#opening" className="font-display text-xl text-foreground">Memoir <i>H1</i></a>
-          <p className="hidden font-mono text-[0.6rem] uppercase text-muted-foreground md:block">{site.period}</p>
-          <a href="#index" className="text-[0.65rem] uppercase text-foreground transition-colors hover:text-primary">Index ↓</a>
-        </div>
-      </header>
       <ChapterNav chapters={chapters} />
+
 
       {chapters.map((chapter, i) => (
         <ChapterSection key={chapter.id} chapter={chapter} first={i === 0}>
