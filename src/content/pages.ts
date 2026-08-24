@@ -148,7 +148,8 @@ export const allPages: MemoirPage[] = [journey, dialogues, growth, notes];
 
 export function prevOf(page: MemoirPage) {
   const i = allPages.findIndex((p) => p.slug === page.slug);
-  const prev = allPages[(i - 1 + allPages.length) % allPages.length];
+  const prev = allPages[(i - 1 + allPages.length) % allPages.length] ?? allPages[0]!;
   return { to: prev.slug, label: prev.title };
+
 }
 
