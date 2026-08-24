@@ -1,6 +1,7 @@
 import { createFileRoute, Link, ClientOnly } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
-import { chapters, entries, site } from "@/content/site";
+import { chapters, entries } from "@/content/site";
+import { QuoteDanmaku } from "@/components/QuoteDanmaku";
 import { ChapterSection } from "@/components/ChapterSection";
 import { ChapterNav } from "@/components/ChapterNav";
 import { GrowingLine } from "@/components/GrowingLine";
@@ -51,22 +52,15 @@ function Index() {
             </p>
           ) : null}
           {chapter.id === "trace" ? <GrowingLine /> : null}
-          {chapter.id === "voices" ? (
-            <div className="space-y-4 font-serif-cn text-foreground/70 italic">
-              <p>“Don't fix it. I understood you perfectly.”</p>
-              <p className="pl-8">“What do people do all that rainy season?”</p>
-              <p className="pl-16">“Let me back up a bit.”</p>
-            </div>
-          ) : null}
+          {chapter.id === "voices" ? <QuoteDanmaku /> : null}
+
         </ChapterSection>
       ))}
 
        <section id="index" className="relative border-t border-border px-6 py-32 md:px-12">
          <div className="mx-auto w-full max-w-6xl">
-           <div className="flex items-end justify-between border-b border-foreground pb-5">
-             <div><p className="text-[0.65rem] uppercase text-primary">Archive index</p><h2 className="mt-3 text-5xl md:text-7xl">继续阅读</h2></div>
-             <p className="hidden font-mono text-[0.6rem] text-muted-foreground md:block">04 ENTRIES / PERSONAL ARCHIVE</p>
-           </div>
+           <div className="divide-y divide-border border-t border-foreground">
+
            <div className="divide-y divide-border">
             {entries.map((entry) => (
               <Link
