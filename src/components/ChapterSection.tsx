@@ -33,7 +33,7 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
 
       const layers = el.querySelectorAll<HTMLElement>("[data-anim]");
       gsap.from(layers, {
-        yPercent: 42,
+        yPercent: 24,
         opacity: 0,
         filter: "blur(6px)",
         duration: 1.1,
@@ -41,6 +41,16 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
         stagger: 0.12,
         scrollTrigger: { trigger: el, start: "top 72%" },
       });
+
+      const reveal = el.querySelector<HTMLElement>("[data-image-reveal]");
+      if (reveal) {
+        gsap.from(reveal, {
+          clipPath: "inset(0 100% 0 0)",
+          duration: 1.35,
+          ease: "power4.inOut",
+          scrollTrigger: { trigger: el, start: "top 68%" },
+        });
+      }
 
       const drift = el.querySelector<HTMLElement>("[data-drift]");
       if (drift) {
@@ -59,38 +69,47 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
     <section
       ref={root}
       id={chapter.id}
-      className="relative flex min-h-screen items-center px-6 py-28 md:px-16"
+      className="relative flex min-h-screen scroll-mt-20 items-center border-t border-border/70 px-6 py-24 md:px-12 lg:py-32"
     >
-      <div className="mx-auto w-full max-w-4xl">
-        <div data-anim className="mb-8 flex items-center gap-4">
-          <span className="font-serif-cn text-sm tracking-[0.4em] text-primary">
-            {chapter.index}
-          </span>
-          <span className="h-px w-16 bg-border" />
-          <span className="text-xs tracking-[0.35em] text-muted-foreground">{chapter.label}</span>
-        </div>
-
-        <h2
-          data-anim
-          data-drift
-          className={
-            first
-              ? "font-serif-cn text-5xl leading-[1.15] text-foreground md:text-7xl"
-              : "font-serif-cn text-3xl leading-[1.3] text-foreground md:text-5xl"
-          }
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        <figure
+          data-image-reveal
+          className={`editorial-figure group relative lg:col-span-7 ${chapter.align === "image-right" ? "lg:order-2" : ""}`}
         >
-          {chapter.headline}
-        </h2>
-
-        <p data-anim className="mt-8 max-w-xl text-base leading-loose text-foreground/75 md:text-lg">
-          {chapter.line}
-        </p>
-
-        {children ? (
-          <div data-anim className="mt-14">
-            {children}
+          <div className={`overflow-hidden bg-muted ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}>
+            <img
+              src={chapter.image}
+              alt={chapter.imageAlt}
+              width={first ? 1600 : 1200}
+              height={first ? 900 : 1500}
+              loading={first ? "eager" : "lazy"}
+              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
+            />
           </div>
-        ) : null}
+          <figcaption className="mt-3 flex justify-between gap-4 font-mono text-[0.6rem] uppercase text-muted-foreground">
+            <span>{chapter.figure}</span><span>GRAIN 400 / ARCHIVE</span>
+          </figcaption>
+        </figure>
+
+        <div className={`relative lg:col-span-5 ${chapter.align === "image-right" ? "lg:order-1 lg:pr-8" : "lg:pl-8"}`}>
+          <div data-anim className="mb-8 flex items-center gap-4">
+            <span className="font-display text-3xl italic text-primary">{chapter.index}.</span>
+            <span className="h-px w-12 bg-primary" />
+            <span className="text-[0.65rem] uppercase text-muted-foreground">{chapter.label}</span>
+          </div>
+          <h2 data-anim data-drift className={first ? "text-5xl leading-[1.05] md:text-7xl" : "text-4xl leading-tight md:text-6xl"}>
+            {chapter.headline}
+          </h2>
+          <p data-anim className="mt-8 max-w-md text-base leading-loose text-foreground/75 md:text-lg">{chapter.line}</p>
+          <div data-anim className="mt-10 flex items-start gap-6 border-t border-border pt-6">
+            <strong className="font-display text-5xl font-normal text-primary">{chapter.stat.value}</strong>
+            <span className="max-w-24 pt-2 text-[0.6rem] uppercase leading-relaxed text-muted-foreground">{chapter.stat.label}</span>
+          </div>
+          {children ? <div data-anim className="mt-10">{children}</div> : null}
+          <div data-anim className="mt-10 space-y-1 border-t border-border pt-5 font-mono text-[0.58rem] text-muted-foreground">
+            {chapter.meta.map((item) => <p key={item}>{item}</p>)}
+          </div>
+        </div>
       </div>
     </section>
   );
