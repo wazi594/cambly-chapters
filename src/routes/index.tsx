@@ -1,6 +1,7 @@
 import { createFileRoute, Link, ClientOnly } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
-import { chapters, entries, site } from "@/content/site";
+import { chapters, entries } from "@/content/site";
+import { QuoteDanmaku } from "@/components/QuoteDanmaku";
 import { ChapterSection } from "@/components/ChapterSection";
 import { ChapterNav } from "@/components/ChapterNav";
 import { GrowingLine } from "@/components/GrowingLine";
@@ -40,14 +41,8 @@ function Index() {
         </Suspense>
       </ClientOnly>
       <div className="grain-overlay" />
-      <header className="sticky top-0 z-20 border-b border-border/70 bg-background/80 px-6 backdrop-blur-md md:px-12">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
-          <a href="#opening" className="font-display text-xl text-foreground">Memoir <i>H1</i></a>
-          <p className="hidden font-mono text-[0.6rem] uppercase text-muted-foreground md:block">{site.period}</p>
-          <a href="#index" className="text-[0.65rem] uppercase text-foreground transition-colors hover:text-primary">Index ↓</a>
-        </div>
-      </header>
       <ChapterNav chapters={chapters} />
+
 
       {chapters.map((chapter, i) => (
         <ChapterSection key={chapter.id} chapter={chapter} first={i === 0}>
@@ -57,23 +52,15 @@ function Index() {
             </p>
           ) : null}
           {chapter.id === "trace" ? <GrowingLine /> : null}
-          {chapter.id === "voices" ? (
-            <div className="space-y-4 font-serif-cn text-foreground/70 italic">
-              <p>“Don't fix it. I understood you perfectly.”</p>
-              <p className="pl-8">“What do people do all that rainy season?”</p>
-              <p className="pl-16">“Let me back up a bit.”</p>
-            </div>
-          ) : null}
+          {chapter.id === "voices" ? <QuoteDanmaku /> : null}
+
         </ChapterSection>
       ))}
 
        <section id="index" className="relative border-t border-border px-6 py-32 md:px-12">
          <div className="mx-auto w-full max-w-6xl">
-           <div className="flex items-end justify-between border-b border-foreground pb-5">
-             <div><p className="text-[0.65rem] uppercase text-primary">Archive index</p><h2 className="mt-3 text-5xl md:text-7xl">继续阅读</h2></div>
-             <p className="hidden font-mono text-[0.6rem] text-muted-foreground md:block">04 ENTRIES / PERSONAL ARCHIVE</p>
-           </div>
-           <div className="divide-y divide-border">
+           <div className="divide-y divide-border border-t border-foreground">
+
             {entries.map((entry) => (
               <Link
                 key={entry.to}
