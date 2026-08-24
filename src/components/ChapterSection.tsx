@@ -128,11 +128,14 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
     >
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
         <figure
-          data-image-reveal
           className={`editorial-figure group relative lg:col-span-7 ${chapter.align === "image-right" ? "order-2 lg:order-2" : ""}`}
         >
-          <div className={`overflow-hidden bg-muted ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}>
+          <div
+            data-image-reveal
+            className={`relative overflow-hidden bg-muted ${first ? "aspect-[16/9]" : "aspect-[4/5]"}`}
+          >
             <img
+              data-image
               src={chapter.image}
               alt={chapter.imageAlt}
               width={first ? 1600 : 1200}
@@ -140,7 +143,15 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
               loading={first ? "eager" : "lazy"}
               className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
             />
+            {chapter.reveal === "slats" ? (
+              <div aria-hidden className="pointer-events-none absolute inset-0 flex">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <span key={i} data-slat className="h-full flex-1 origin-top scale-y-0 bg-background" />
+                ))}
+              </div>
+            ) : null}
           </div>
+
           <figcaption className="mt-3 flex justify-between gap-4 font-mono text-[0.6rem] uppercase text-muted-foreground">
             <span>{chapter.figure}</span><span>GRAIN 400 / ARCHIVE</span>
           </figcaption>
