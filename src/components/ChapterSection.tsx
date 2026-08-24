@@ -26,31 +26,76 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
         trigger: el,
         start: "top 65%",
         end: "bottom 35%",
-        onEnter: () => setPaintTint(chapter.tint),
-        onEnterBack: () => setPaintTint(chapter.tint),
+        onEnter: () => setPaintTint(chapter.tint, chapter.deep),
+        onEnterBack: () => setPaintTint(chapter.tint, chapter.deep),
       });
 
       if (reduced) return;
 
+      const fromLeft = chapter.align === "image-right";
       const layers = el.querySelectorAll<HTMLElement>("[data-anim]");
       gsap.from(layers, {
-        yPercent: 24,
+        yPercent: 18,
+        xPercent: fromLeft ? -6 : 6,
         opacity: 0,
         filter: "blur(6px)",
         duration: 1.1,
         ease: "power3.out",
-        stagger: 0.12,
+        stagger: 0.1,
         scrollTrigger: { trigger: el, start: "top 72%" },
       });
 
       const reveal = el.querySelector<HTMLElement>("[data-image-reveal]");
-      if (reveal) {
-        gsap.from(reveal, {
-          clipPath: "inset(0 100% 0 0)",
-          duration: 1.35,
-          ease: "power4.inOut",
-          scrollTrigger: { trigger: el, start: "top 68%" },
-        });
+      const img = el.querySelector<HTMLElement>("[data-image]");
+      const slats = el.querySelectorAll<HTMLElement>("[data-slat]");
+      const st = { trigger: el, start: "top 68%" } as const;
+
+      if (reveal && img) {
+        switch (chapter.reveal) {
+          case "curtain":
+            gsap.from(reveal, { clipPath: "inset(100% 0 0 0)", duration: 1.2, ease: "power4.inOut", scrollTrigger: st });
+            gsap.from(img, { yPercent: 12, scale: 1.12, duration: 1.6, ease: "power3.out", scrollTrigger: st });
+            break;
+          case "iris":
+            gsap.from(reveal, {
+              clipPath: "circle(6% at 50% 58%)",
+              duration: 1.5,
+              ease: "power3.inOut",
+              scrollTrigger: st,
+            });
+            gsap.from(img, { scale: 1.2, rotate: 1.5, duration: 1.8, ease: "power3.out", scrollTrigger: st });
+            break;
+          case "slats":
+            gsap.from(slats, {
+              scaleY: 1,
+              transformOrigin: "top center",
+              duration: 0.9,
+              ease: "power3.inOut",
+              stagger: { each: 0.09, from: "random" },
+              scrollTrigger: st,
+            });
+            gsap.from(img, { scale: 1.1, duration: 1.6, ease: "power2.out", scrollTrigger: st });
+            break;
+          case "tilt":
+            gsap.from(reveal, {
+              clipPath: "inset(0 0 100% 0)",
+              rotate: -1.6,
+              yPercent: 8,
+              duration: 1.25,
+              ease: "power4.out",
+              scrollTrigger: st,
+            });
+            gsap.from(img, { scale: 1.14, xPercent: -6, duration: 1.7, ease: "power3.out", scrollTrigger: st });
+            break;
+          default:
+            gsap.from(reveal, {
+              clipPath: fromLeft ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
+              duration: 1.35,
+              ease: "power4.inOut",
+              scrollTrigger: st,
+            });
+            gsap.from(img, { scale: 1.16, duration: 1.8, ease: "power3.out", scrollTrigger: st });
+        }
       }
 
       const drift = el.querySelector<HTMLElement>("[data-drift]");
@@ -61,10 +106,19 @@ export function ChapterSection({ chapter, children, first = false }: Props) {
           scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
         });
       }
+
+      if (img) {
+        gsap.to(img, {
+          yPercent: chapter.align === "image-right" ? -6 : -10,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+        });
+      }
     }, el);
 
     return () => ctx.revert();
-  }, [chapter.tint]);
+  }, [chapter.tint, chapter.deep, chapter.reveal, chapter.align]);
+
 
   return (
     <section
