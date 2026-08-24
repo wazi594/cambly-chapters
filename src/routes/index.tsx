@@ -61,7 +61,6 @@ function Index() {
          <div className="mx-auto w-full max-w-6xl">
            <div className="divide-y divide-border border-t border-foreground">
 
-           <div className="divide-y divide-border">
             {entries.map((entry) => (
               <Link
                 key={entry.to}
