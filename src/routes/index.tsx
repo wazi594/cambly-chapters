@@ -53,7 +53,7 @@ function Index() {
         <ChapterSection key={chapter.id} chapter={chapter} first={i === 0}>
           {chapter.id === "opening" ? (
             <p className="font-display text-lg italic text-foreground/60">
-              {site.subtitle} · Scroll to explore
+              （待补齐）
             </p>
           ) : null}
           {chapter.id === "trace" ? <GrowingLine /> : null}
