@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DialoguesRouteImport } from './routes/dialogues'
+import { Route as GrowthRouteImport } from './routes/growth'
+import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as NotesRouteImport } from './routes/notes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DialoguesRoute = DialoguesRouteImport.update({
+  id: '/dialogues',
+  path: '/dialogues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrowthRoute = GrowthRouteImport.update({
+  id: '/growth',
+  path: '/growth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dialogues': typeof DialoguesRoute
+  '/growth': typeof GrowthRoute
+  '/journey': typeof JourneyRoute
+  '/notes': typeof NotesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dialogues': typeof DialoguesRoute
+  '/growth': typeof GrowthRoute
+  '/journey': typeof JourneyRoute
+  '/notes': typeof NotesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dialogues': typeof DialoguesRoute
+  '/growth': typeof GrowthRoute
+  '/journey': typeof JourneyRoute
+  '/notes': typeof NotesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
+  id: '__root__' | '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DialoguesRoute: typeof DialoguesRoute
+  GrowthRoute: typeof GrowthRoute
+  JourneyRoute: typeof JourneyRoute
+  NotesRoute: typeof NotesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dialogues': {
+      id: '/dialogues'
+      path: '/dialogues'
+      fullPath: '/dialogues'
+      preLoaderRoute: typeof DialoguesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/growth': {
+      id: '/growth'
+      path: '/growth'
+      fullPath: '/growth'
+      preLoaderRoute: typeof GrowthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DialoguesRoute: DialoguesRoute,
+  GrowthRoute: GrowthRoute,
+  JourneyRoute: JourneyRoute,
+  NotesRoute: NotesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
