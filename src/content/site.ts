@@ -4,7 +4,7 @@ import learnerImage from "@/assets/memoir-learner.jpg";
 import notesImage from "@/assets/memoir-notes.jpg";
 
 export const site = {
-  title: "半年，与世界连线",
+  title: "与世界连上线的半年",
   subtitle: "我在 Cambly 学英语的一段回忆录",
   period: "2025 年冬 — 2026 年夏",
 };
@@ -32,10 +32,10 @@ export type Chapter = {
 export const chapters: Chapter[] = [
   {
     id: "opening",
-    index: "00",
+    index: "\n",
     label: "开场",
     headline: site.title,
-    line: "一根网线，把一间小屋接到了另一个时区的清晨。",
+    line: "我在 Cambly 学英语的一段回忆录\u00a0",
     tint: [0.93, 0.92, 0.85],
     deep: [0.64, 0.70, 0.62],
     reveal: "wipe",
