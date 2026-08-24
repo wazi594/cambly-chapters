@@ -66,7 +66,7 @@ const fragmentShader = /* glsl */ `
     float streak = fbm(vec2(st.x * 3.0, st.y * 22.0 + paint * 2.0)) * 0.08;
 
     float v = clamp(paint + streak + pull * 0.18, 0.0, 1.0);
-    vec3 col = mix(uDeep, uTint, smoothstep(0.18, 0.92, v));
+    vec3 col = mix(uDeep, uTint, smoothstep(0.05, 0.78, v));
 
     // 边缘压暗，像纸的四角
     float vig = smoothstep(1.25, 0.25, distance(uv, vec2(0.5)));
@@ -101,7 +101,7 @@ export default function PaintedBackground() {
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
       uTint: { value: new THREE.Vector3(...getPaintTint()) },
-      uDeep: { value: new THREE.Vector3(0.66, 0.61, 0.53) },
+      uDeep: { value: new THREE.Vector3(0.76, 0.71, 0.62) },
     };
 
     const mesh = new THREE.Mesh(
