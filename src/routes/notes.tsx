@@ -9,6 +9,8 @@ export const Route = createFileRoute("/notes")({
       { name: "description", content: notes.description },
       { property: "og:title", content: "零散记录 · Cambly 半年回忆录" },
       { property: "og:description", content: notes.description },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => <MemoirArticle page={notes} />,

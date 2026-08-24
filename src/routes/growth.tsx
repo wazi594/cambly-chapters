@@ -9,6 +9,8 @@ export const Route = createFileRoute("/growth")({
       { name: "description", content: growth.description },
       { property: "og:title", content: "我的成长 · Cambly 半年回忆录" },
       { property: "og:description", content: growth.description },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => <MemoirArticle page={growth} />,

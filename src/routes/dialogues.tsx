@@ -9,6 +9,8 @@ export const Route = createFileRoute("/dialogues")({
       { name: "description", content: dialogues.description },
       { property: "og:title", content: "对话记录 · Cambly 半年回忆录" },
       { property: "og:description", content: dialogues.description },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => <MemoirArticle page={dialogues} />,
