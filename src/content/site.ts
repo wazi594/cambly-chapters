@@ -1,4 +1,7 @@
 // 站点文案集中在此，替换文字即可，无需改动组件。
+import deskImage from "@/assets/memoir-desk.jpg";
+import learnerImage from "@/assets/memoir-learner.jpg";
+import notesImage from "@/assets/memoir-notes.jpg";
 
 export const site = {
   title: "半年，与世界连线",
@@ -14,6 +17,12 @@ export type Chapter = {
   line: string;
   /** 章节主色，驱动背景画布的色彩过渡（0-1 RGB） */
   tint: [number, number, number];
+  image: string;
+  imageAlt: string;
+  figure: string;
+  meta: string[];
+  stat: { value: string; label: string };
+  align: "image-left" | "image-right";
 };
 
 export const chapters: Chapter[] = [
@@ -23,7 +32,13 @@ export const chapters: Chapter[] = [
     label: "开场",
     headline: site.title,
     line: "一根网线，把一间小屋接到了另一个时区的清晨。",
-    tint: [0.93, 0.9, 0.83],
+    tint: [0.86, 0.87, 0.81],
+    image: deskImage,
+    imageAlt: "书桌上的笔记本电脑、手写笔记与咖啡",
+    figure: "FIG. 00 — THE CONNECTION",
+    meta: ["ARCHIVE: CAMBLY H1", "STATUS: OPENING FRAME"],
+    stat: { value: "180", label: "days of conversation" },
+    align: "image-right",
   },
   {
     id: "start",
@@ -31,7 +46,13 @@ export const chapters: Chapter[] = [
     label: "起点",
     headline: "第一次连线",
     line: "十五分钟，说了不到十句话，却记了一整页。",
-    tint: [0.88, 0.82, 0.72],
+    tint: [0.8, 0.83, 0.76],
+    image: learnerImage,
+    imageAlt: "窗边使用电脑练习英语的学习者",
+    figure: "FIG. 01 — FIRST CONTACT",
+    meta: ["ENTRY ID: WINTER-001", "MODE: ORAL PRACTICE"],
+    stat: { value: "10", label: "words, more or less" },
+    align: "image-left",
   },
   {
     id: "trace",
@@ -39,7 +60,13 @@ export const chapters: Chapter[] = [
     label: "轨迹",
     headline: "半年的节奏",
     line: "从每周三次，到几乎每天；从背句子，到忘记自己在说外语。",
-    tint: [0.82, 0.8, 0.73],
+    tint: [0.75, 0.8, 0.73],
+    image: notesImage,
+    imageAlt: "英语学习笔记、耳机与地图碎片",
+    figure: "FIG. 02 — A LINE IN TIME",
+    meta: ["SPAN: NOVEMBER—APRIL", "FREQUENCY: ALMOST DAILY"],
+    stat: { value: "6", label: "months in motion" },
+    align: "image-right",
   },
   {
     id: "voices",
@@ -47,7 +74,13 @@ export const chapters: Chapter[] = [
     label: "声音",
     headline: "那些留下来的句子",
     line: "有人纠正我的时态，也有人问我家乡的雨季。",
-    tint: [0.78, 0.79, 0.74],
+    tint: [0.72, 0.78, 0.72],
+    image: deskImage,
+    imageAlt: "远程对话中的电脑与摊开的学习笔记",
+    figure: "FIG. 03 — VOICES KEPT",
+    meta: ["FORMAT: DIALOGUE FRAGMENTS", "LANGUAGE: EN / ZH"],
+    stat: { value: "03", label: "sentences remembered" },
+    align: "image-left",
   },
   {
     id: "growth",
@@ -55,7 +88,13 @@ export const chapters: Chapter[] = [
     label: "生长",
     headline: "语言之外的东西",
     line: "英语只是介质，真正变了的是我敢不敢开口。",
-    tint: [0.84, 0.81, 0.75],
+    tint: [0.78, 0.81, 0.75],
+    image: learnerImage,
+    imageAlt: "在自然光下进行线上交流的学习者",
+    figure: "FIG. 04 — BEYOND LANGUAGE",
+    meta: ["MILESTONE: SPEAKING FREELY", "STATUS: STILL GROWING"],
+    stat: { value: "∞", label: "connections ahead" },
+    align: "image-right",
   },
 ];
 
