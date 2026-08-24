@@ -101,7 +101,7 @@ export default function PaintedBackground() {
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
       uTint: { value: new THREE.Vector3(...getPaintTint()) },
-      uDeep: { value: new THREE.Vector3(0.42, 0.36, 0.29) },
+      uDeep: { value: new THREE.Vector3(0.66, 0.61, 0.53) },
     };
 
     const mesh = new THREE.Mesh(
