@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { loadGsapWithScrollTrigger } from "@/lib/gsap-client";
 import { prefersReducedMotion } from "@/lib/paint-store";
 
 const marks = ["11月", "12月", "1月", "2月", "3月", "4月"];
@@ -12,28 +11,39 @@ export function GrowingLine() {
   useEffect(() => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
-    gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        "[data-line]",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          ease: "none",
-          transformOrigin: "left center",
-          scrollTrigger: { trigger: el, start: "top 82%", end: "bottom 5%", scrub: true },
-        },
-      );
-      gsap.from("[data-mark]", {
-        opacity: 0,
-        y: 10,
-        stagger: 0.38,
-        scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 4%", scrub: true },
-      });
-    }, el);
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
 
-    return () => ctx.revert();
+    void loadGsapWithScrollTrigger().then(({ gsap }) => {
+      if (cancelled) return;
+
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          "[data-line]",
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            transformOrigin: "left center",
+            scrollTrigger: { trigger: el, start: "top 82%", end: "bottom 5%", scrub: true },
+          },
+        );
+        gsap.from("[data-mark]", {
+          opacity: 0,
+          y: 10,
+          stagger: 0.38,
+          scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 4%", scrub: true },
+        });
+      }, el);
+
+      cleanup = () => ctx.revert();
+    });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
   }, []);
 
   return (

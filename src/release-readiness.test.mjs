@@ -21,6 +21,8 @@ test("the production build emits Netlify's TanStack Start deployment contract", 
   const projectRoot = new URL("../", import.meta.url);
   const dist = new URL("../dist/", import.meta.url);
   const netlify = new URL("../.netlify/", import.meta.url);
+  const netlifyFunction = new URL("../.netlify/v1/functions/server.mjs", import.meta.url);
+  const bundledFunction = new URL("../.netlify/server-bundle-test.mjs", import.meta.url);
 
   await Promise.all([
     rm(dist, { recursive: true, force: true }),
@@ -36,4 +38,35 @@ test("the production build emits Netlify's TanStack Start deployment contract", 
   assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
   assert.ok(existsSync(new URL("client/", dist)), "missing Netlify publish directory: dist/client");
   assert.ok(existsSync(netlify), "missing Netlify runtime bundle: .netlify");
+
+  // Netlify flattens the generated handler before running it in Lambda. Reproduce
+  // that boundary and disable Node's syntax detection to match the CommonJS
+  // interpretation that exposed the GSAP ScrollTrigger production crash.
+  const bundle = spawnSync(
+    process.execPath,
+    [
+      "node_modules/esbuild/bin/esbuild",
+      decodeURIComponent(netlifyFunction.pathname),
+      "--bundle",
+      "--format=esm",
+      "--platform=node",
+      "--packages=external",
+      `--outfile=${decodeURIComponent(bundledFunction.pathname)}`,
+    ],
+    { cwd: decodeURIComponent(projectRoot.pathname), encoding: "utf8" },
+  );
+
+  assert.equal(bundle.status, 0, `${bundle.stdout}\n${bundle.stderr}`);
+
+  const coldStart = spawnSync(
+    process.execPath,
+    ["--no-experimental-detect-module", decodeURIComponent(bundledFunction.pathname)],
+    { cwd: decodeURIComponent(projectRoot.pathname), encoding: "utf8" },
+  );
+
+  assert.equal(
+    coldStart.status,
+    0,
+    `Netlify function failed during cold start:\n${coldStart.stdout}\n${coldStart.stderr}`,
+  );
 });
