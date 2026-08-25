@@ -1,6 +1,5 @@
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -58,6 +57,7 @@
   --font-serif-cn: "Noto Serif SC", "Songti SC", serif;
   --font-sans-cn: "Work Sans", "Noto Sans SC", system-ui, sans-serif;
   --font-display: "Instrument Serif", "Noto Serif SC", serif;
+  --font-quote: "Newsreader", "Noto Serif SC", serif;
 }
 
 :root {
@@ -188,6 +188,25 @@
   font-family: var(--font-display);
 }
 
+@utility font-quote {
+  font-family: var(--font-quote);
+}
+
+.story-teacher-name {
+  display: block;
+}
+
+.story-teacher-meta {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  color: var(--color-muted-foreground);
+}
+
 @utility editorial-figure {
   filter: saturate(0.65) contrast(1.04);
   & img {
@@ -199,8 +218,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
@@ -209,11 +232,39 @@
 /* 长文阅读排版 */
 @utility prose-memoir {
   color: var(--color-foreground);
-  font-size: var(--read-size, 1rem);
-  line-height: var(--read-leading, 1.95);
+  font-size: 1.0625rem;
+  line-height: 1.95;
   letter-spacing: 0.015em;
 }
 
+.memoir-quote {
+  position: relative;
+  margin-block: 3.5rem;
+  border-block: 1px solid var(--color-border);
+  padding: 2.25rem 0.25rem 2rem 1.75rem;
+}
+
+.memoir-quote-mark {
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  font-family: var(--font-quote);
+  font-size: 2.25rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--color-primary) 55%, transparent);
+}
+
+@media (min-width: 768px) {
+  .memoir-quote {
+    margin-inline: -2.5rem;
+    padding: 2.75rem 2.5rem 2.5rem 3rem;
+  }
+
+  .memoir-quote-mark {
+    left: 1rem;
+    top: 1.65rem;
+  }
+}
 
 @utility rule-hairline {
   border-top: 1px solid var(--color-border);
@@ -221,8 +272,12 @@
 
 /* 弹幕式摘录轨道 */
 @keyframes danmaku-drift {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 @utility danmaku-track {
@@ -231,4 +286,357 @@
   gap: 3rem;
   animation: danmaku-drift linear infinite;
   will-change: transform;
+}
+
+/* 第 04 章：空间光阈入口 */
+.light-threshold-image {
+  transform: scale(1.01);
+  filter: brightness(0.82) saturate(0.78);
+  transition:
+    transform 1100ms cubic-bezier(0.2, 0.75, 0.2, 1),
+    filter 900ms ease;
+}
+
+.threshold-link {
+  cursor: pointer;
+}
+
+.threshold-copy {
+  opacity: 0.7;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 650ms ease,
+    transform 850ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.threshold-link:hover .threshold-copy,
+.threshold-link:focus-visible .threshold-copy {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.light-thresholds:has(.threshold-letter:hover) .light-threshold-image,
+.light-thresholds:has(.threshold-letter:focus-visible) .light-threshold-image {
+  transform: scale(1.045) translate3d(1.2%, 0, 0);
+  filter: brightness(1.02) saturate(0.92);
+}
+
+.light-thresholds:has(.threshold-capsule:hover) .light-threshold-image,
+.light-thresholds:has(.threshold-capsule:focus-visible) .light-threshold-image {
+  transform: scale(1.035) translate3d(-1%, 0, 0);
+  filter: brightness(0.94) saturate(0.9);
+}
+
+@media (max-width: 767px) {
+  .threshold-copy {
+    opacity: 0.9;
+  }
+}
+
+@keyframes music-pulse {
+  0%,
+  100% {
+    height: 0.35rem;
+  }
+  50% {
+    height: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .music-bar {
+    animation: music-pulse 900ms ease-in-out infinite;
+  }
+}
+
+/* 第 02 章：数据碎片循环拼贴 */
+.trajectory-grid {
+  opacity: 0.34;
+  background-image:
+    linear-gradient(to right, rgba(32, 43, 37, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 43, 37, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.trajectory-sheet {
+  will-change: transform, opacity;
+  transition:
+    filter 600ms ease,
+    box-shadow 600ms ease;
+}
+
+.trajectory-sheet-blue {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 88%,
+    92% 91%,
+    84% 87%,
+    75% 93%,
+    64% 88%,
+    55% 94%,
+    45% 89%,
+    33% 94%,
+    22% 89%,
+    10% 93%,
+    0 88%
+  );
+}
+
+@keyframes trajectory-data-cycle {
+  0%,
+  20% {
+    transform: translate3d(-3%, 3%, 0) rotate(-2deg);
+    opacity: 0.92;
+  }
+  34%,
+  58% {
+    transform: translate3d(4%, -2%, 0) rotate(1deg);
+    opacity: 1;
+  }
+  72%,
+  100% {
+    transform: translate3d(-1%, 1%, 0) rotate(-0.5deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes trajectory-blue-cycle {
+  0%,
+  18% {
+    transform: translate3d(5%, -4%, 0) scaleX(0.72);
+    transform-origin: right center;
+    opacity: 0.75;
+  }
+  34%,
+  64% {
+    transform: translate3d(0, 3%, 0) scaleX(1);
+    opacity: 0.96;
+  }
+  78%,
+  100% {
+    transform: translate3d(-5%, -1%, 0) scaleX(0.82);
+    transform-origin: left center;
+    opacity: 0.82;
+  }
+}
+
+@keyframes trajectory-chart-cycle {
+  0%,
+  24% {
+    transform: translate3d(4%, 6%, 0) rotate(1.5deg);
+    opacity: 0.88;
+  }
+  40%,
+  66% {
+    transform: translate3d(-3%, -1%, 0) rotate(-1deg);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: translate3d(1%, 3%, 0) rotate(0.4deg);
+    opacity: 0.92;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trajectory-sheet-data {
+    animation: trajectory-data-cycle 8.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .trajectory-sheet-blue {
+    animation: trajectory-blue-cycle 8.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .trajectory-sheet-chart {
+    animation: trajectory-chart-cycle 8.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .trajectory-collage:hover .trajectory-sheet {
+    filter: saturate(1.12) contrast(1.03);
+    box-shadow: 0 24px 54px -26px rgba(32, 43, 37, 0.7);
+  }
+}
+
+.voice-archive-link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.voice-archive-link:hover::after,
+.voice-archive-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* 第 01 章：九段关系的悬浮姓名带 */
+.story-deck-shell {
+  margin-top: 0.75rem;
+  touch-action: pan-y;
+}
+.story-deck {
+  position: relative;
+  height: 39rem;
+  overflow: hidden;
+  perspective: 780px;
+  perspective-origin: 50% 48%;
+  -webkit-mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
+}
+.story-deck-stage {
+  --deck-rotate-x: 0deg;
+  --deck-rotate-y: 0deg;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: rotateX(var(--deck-rotate-x)) rotateY(var(--deck-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  will-change: transform;
+}
+.story-strip-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(27rem, 68%);
+  opacity: var(--helix-opacity);
+  transform: translate3d(
+      calc(-50% + var(--helix-x)),
+      calc(-50% + var(--helix-y)),
+      var(--helix-depth)
+    )
+    rotateY(var(--helix-angle));
+  transform-origin: center;
+  transform-style: preserve-3d;
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 700ms ease;
+  pointer-events: none;
+  will-change: transform;
+}
+.story-strip-item:hover,
+.story-strip-item:focus-within {
+  z-index: 20 !important;
+  opacity: 1;
+}
+.story-name-strip {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  color: var(--color-foreground);
+  text-decoration: none;
+  outline: none;
+  pointer-events: auto;
+}
+.story-strip-visual {
+  position: relative;
+  display: inline-block;
+  padding: 0.72rem 0.15rem 0.9rem;
+  transform-origin: left center;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.story-strip-visual::after {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  bottom: 0.35rem;
+  width: 2.6rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--color-foreground) 34%, transparent);
+  transform-origin: left;
+  transition:
+    width 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 350ms ease;
+}
+.story-strip-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.65vw, 2.35rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.story-strip-note {
+  position: absolute;
+  left: calc(100% + 1.2rem);
+  top: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  color: var(--color-muted-foreground);
+  opacity: 0;
+  transform: translateX(-0.75rem);
+  transition:
+    opacity 350ms ease 60ms,
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.story-strip-arrow {
+  position: absolute;
+  left: calc(100% + 10.5rem);
+  top: 50%;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translate(-0.45rem, 0.12rem);
+  transition:
+    opacity 300ms ease,
+    transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.story-strip-item:hover .story-strip-visual,
+.story-strip-item:focus-within .story-strip-visual {
+  transform: rotateY(var(--helix-counter-angle));
+}
+.story-strip-item:hover .story-strip-visual::after,
+.story-strip-item:focus-within .story-strip-visual::after {
+  width: 100%;
+  background: var(--color-primary);
+}
+.story-strip-item:hover .story-strip-note,
+.story-strip-item:hover .story-strip-arrow,
+.story-strip-item:focus-within .story-strip-note,
+.story-strip-item:focus-within .story-strip-arrow {
+  opacity: 1;
+  transform: translate(0, 0.12rem);
+}
+
+@media (max-width: 767px) {
+  .story-deck {
+    height: 37rem;
+    perspective: 620px;
+  }
+  .story-strip-item {
+    width: 76%;
+    transform: translate3d(
+        calc(-50% + var(--helix-x-mobile)),
+        calc(-50% + var(--helix-y)),
+        var(--helix-depth)
+      )
+      rotateY(var(--helix-angle));
+  }
+  .story-strip-note {
+    display: none;
+  }
+  .story-strip-arrow {
+    left: calc(100% + 0.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-deck-stage,
+  .story-strip-item,
+  .story-strip-visual,
+  .story-strip-visual::after,
+  .story-strip-note,
+  .story-strip-arrow {
+    transition-duration: 1ms;
+  }
+  .story-deck-stage {
+    transform: none;
+  }
 }

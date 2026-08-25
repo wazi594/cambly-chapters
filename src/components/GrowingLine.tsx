@@ -22,14 +22,14 @@ export function GrowingLine() {
           scaleX: 1,
           ease: "none",
           transformOrigin: "left center",
-          scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 82%", end: "bottom 5%", scrub: true },
         },
       );
       gsap.from("[data-mark]", {
         opacity: 0,
         y: 10,
-        stagger: 0.18,
-        scrollTrigger: { trigger: el, start: "top 78%", end: "bottom 50%", scrub: true },
+        stagger: 0.38,
+        scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 4%", scrub: true },
       });
     }, el);
 
@@ -37,9 +37,9 @@ export function GrowingLine() {
   }, []);
 
   return (
-    <div ref={root} className="w-full">
-      <div className="relative h-px w-full bg-border">
-        <div data-line className="absolute inset-0 h-px bg-primary" />
+    <div ref={root} data-timeline-start="top 82%" className="w-full lg:w-[138%]">
+      <div className="relative h-[3px] w-full bg-border">
+        <div data-line data-timeline-line="true" className="absolute inset-0 h-full bg-primary" />
       </div>
       <div className="mt-4 flex justify-between">
         {marks.map((m) => (

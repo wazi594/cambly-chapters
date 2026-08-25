@@ -10,73 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DialoguesRouteImport } from './routes/dialogues'
-import { Route as GrowthRouteImport } from './routes/growth'
-import { Route as JourneyRouteImport } from './routes/journey'
-import { Route as NotesRouteImport } from './routes/notes'
+import { Route as FamilyTracesRouteImport } from './routes/family-traces'
+import { Route as LetterRouteImport } from './routes/letter'
+import { Route as RepeatedWordsRouteImport } from './routes/repeated-words'
+import { Route as StoriesRouteImport } from './routes/stories'
+import { Route as TimeCapsuleRouteImport } from './routes/time-capsule'
+import { Route as TrajectoryRouteImport } from './routes/trajectory'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DialoguesRoute = DialoguesRouteImport.update({
-  id: '/dialogues',
-  path: '/dialogues',
+const FamilyTracesRoute = FamilyTracesRouteImport.update({
+  id: '/family-traces',
+  path: '/family-traces',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GrowthRoute = GrowthRouteImport.update({
-  id: '/growth',
-  path: '/growth',
+const LetterRoute = LetterRouteImport.update({
+  id: '/letter',
+  path: '/letter',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JourneyRoute = JourneyRouteImport.update({
-  id: '/journey',
-  path: '/journey',
+const RepeatedWordsRoute = RepeatedWordsRouteImport.update({
+  id: '/repeated-words',
+  path: '/repeated-words',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesRoute = NotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
+const StoriesRoute = StoriesRouteImport.update({
+  id: '/stories',
+  path: '/stories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimeCapsuleRoute = TimeCapsuleRouteImport.update({
+  id: '/time-capsule',
+  path: '/time-capsule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrajectoryRoute = TrajectoryRouteImport.update({
+  id: '/trajectory',
+  path: '/trajectory',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dialogues': typeof DialoguesRoute
-  '/growth': typeof GrowthRoute
-  '/journey': typeof JourneyRoute
-  '/notes': typeof NotesRoute
+  '/family-traces': typeof FamilyTracesRoute
+  '/letter': typeof LetterRoute
+  '/repeated-words': typeof RepeatedWordsRoute
+  '/stories': typeof StoriesRoute
+  '/time-capsule': typeof TimeCapsuleRoute
+  '/trajectory': typeof TrajectoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dialogues': typeof DialoguesRoute
-  '/growth': typeof GrowthRoute
-  '/journey': typeof JourneyRoute
-  '/notes': typeof NotesRoute
+  '/family-traces': typeof FamilyTracesRoute
+  '/letter': typeof LetterRoute
+  '/repeated-words': typeof RepeatedWordsRoute
+  '/stories': typeof StoriesRoute
+  '/time-capsule': typeof TimeCapsuleRoute
+  '/trajectory': typeof TrajectoryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/dialogues': typeof DialoguesRoute
-  '/growth': typeof GrowthRoute
-  '/journey': typeof JourneyRoute
-  '/notes': typeof NotesRoute
+  '/family-traces': typeof FamilyTracesRoute
+  '/letter': typeof LetterRoute
+  '/repeated-words': typeof RepeatedWordsRoute
+  '/stories': typeof StoriesRoute
+  '/time-capsule': typeof TimeCapsuleRoute
+  '/trajectory': typeof TrajectoryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
+  fullPaths:
+    | '/'
+    | '/family-traces'
+    | '/letter'
+    | '/repeated-words'
+    | '/stories'
+    | '/time-capsule'
+    | '/trajectory'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
-  id: '__root__' | '/' | '/dialogues' | '/growth' | '/journey' | '/notes'
+  to:
+    | '/'
+    | '/family-traces'
+    | '/letter'
+    | '/repeated-words'
+    | '/stories'
+    | '/time-capsule'
+    | '/trajectory'
+  id:
+    | '__root__'
+    | '/'
+    | '/family-traces'
+    | '/letter'
+    | '/repeated-words'
+    | '/stories'
+    | '/time-capsule'
+    | '/trajectory'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DialoguesRoute: typeof DialoguesRoute
-  GrowthRoute: typeof GrowthRoute
-  JourneyRoute: typeof JourneyRoute
-  NotesRoute: typeof NotesRoute
+  FamilyTracesRoute: typeof FamilyTracesRoute
+  LetterRoute: typeof LetterRoute
+  RepeatedWordsRoute: typeof RepeatedWordsRoute
+  StoriesRoute: typeof StoriesRoute
+  TimeCapsuleRoute: typeof TimeCapsuleRoute
+  TrajectoryRoute: typeof TrajectoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -88,32 +130,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dialogues': {
-      id: '/dialogues'
-      path: '/dialogues'
-      fullPath: '/dialogues'
-      preLoaderRoute: typeof DialoguesRouteImport
+    '/family-traces': {
+      id: '/family-traces'
+      path: '/family-traces'
+      fullPath: '/family-traces'
+      preLoaderRoute: typeof FamilyTracesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/growth': {
-      id: '/growth'
-      path: '/growth'
-      fullPath: '/growth'
-      preLoaderRoute: typeof GrowthRouteImport
+    '/letter': {
+      id: '/letter'
+      path: '/letter'
+      fullPath: '/letter'
+      preLoaderRoute: typeof LetterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/journey': {
-      id: '/journey'
-      path: '/journey'
-      fullPath: '/journey'
-      preLoaderRoute: typeof JourneyRouteImport
+    '/repeated-words': {
+      id: '/repeated-words'
+      path: '/repeated-words'
+      fullPath: '/repeated-words'
+      preLoaderRoute: typeof RepeatedWordsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes': {
-      id: '/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesRouteImport
+    '/stories': {
+      id: '/stories'
+      path: '/stories'
+      fullPath: '/stories'
+      preLoaderRoute: typeof StoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/time-capsule': {
+      id: '/time-capsule'
+      path: '/time-capsule'
+      fullPath: '/time-capsule'
+      preLoaderRoute: typeof TimeCapsuleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trajectory': {
+      id: '/trajectory'
+      path: '/trajectory'
+      fullPath: '/trajectory'
+      preLoaderRoute: typeof TrajectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -121,10 +177,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DialoguesRoute: DialoguesRoute,
-  GrowthRoute: GrowthRoute,
-  JourneyRoute: JourneyRoute,
-  NotesRoute: NotesRoute,
+  FamilyTracesRoute: FamilyTracesRoute,
+  LetterRoute: LetterRoute,
+  RepeatedWordsRoute: RepeatedWordsRoute,
+  StoriesRoute: StoriesRoute,
+  TimeCapsuleRoute: TimeCapsuleRoute,
+  TrajectoryRoute: TrajectoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

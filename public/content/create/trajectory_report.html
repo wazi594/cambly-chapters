@@ -1,0 +1,1615 @@
+<title>Cambly 学习轨迹</title>
+<style>
+  :root {
+    --paper: #f2f0e6;
+    --paper-raised: #fbfaf5;
+    --ink: #202b25;
+    --ink-soft: #55584e;
+    --ink-faint: #8a8c80;
+    --rule: rgba(32, 43, 37, 0.14);
+    --rule-strong: rgba(32, 43, 37, 0.28);
+    --blue: #2c4a6e;
+    --blue-soft: #2c4a6e33;
+    --red: #a8402f;
+    --red-soft: #a8402f26;
+    --gold: #a9761e;
+    --gold-soft: #a9761e22;
+    --chip-bg: #e7e3d4;
+    --shadow: 0 1px 2px rgba(32, 43, 37, 0.06), 0 8px 24px -16px rgba(32, 43, 37, 0.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1b1e19;
+      --paper-raised: #23271f;
+      --ink: #ece9dd;
+      --ink-soft: #b7b4a5;
+      --ink-faint: #83816f;
+      --rule: rgba(236, 233, 221, 0.14);
+      --rule-strong: rgba(236, 233, 221, 0.28);
+      --blue: #7fa6d6;
+      --blue-soft: #7fa6d633;
+      --red: #e08a76;
+      --red-soft: #e08a7626;
+      --gold: #e3b45c;
+      --gold-soft: #e3b45c26;
+      --chip-bg: #2c2f26;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1b1e19;
+    --paper-raised: #23271f;
+    --ink: #ece9dd;
+    --ink-soft: #b7b4a5;
+    --ink-faint: #83816f;
+    --rule: rgba(236, 233, 221, 0.14);
+    --rule-strong: rgba(236, 233, 221, 0.28);
+    --blue: #7fa6d6;
+    --blue-soft: #7fa6d633;
+    --red: #e08a76;
+    --red-soft: #e08a7626;
+    --gold: #e3b45c;
+    --gold-soft: #e3b45c26;
+    --chip-bg: #2c2f26;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -16px rgba(0, 0, 0, 0.6);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  /* ---- header ---- */
+  .masthead {
+    border-top: 3px double var(--rule-strong);
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0 20px;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .eyebrow .dash {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Songti SC", serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 40px);
+    margin: 0 0 8px;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  /* ---- stat chips ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 32px 0 48px;
+  }
+  .stat {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 16px 14px;
+    box-shadow: var(--shadow);
+  }
+  .stat .num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--blue);
+    line-height: 1.1;
+  }
+  .stat .label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  @media (max-width: 640px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ---- sections ---- */
+  section {
+    margin-bottom: 52px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .section-head .no {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  h2 {
+    font-family: Georgia, "Iowan Old Style", "Songti SC", serif;
+    font-weight: 500;
+    font-size: 21px;
+    margin: 0;
+  }
+  .section-sub {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 6px 0 20px;
+    max-width: 68ch;
+  }
+
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px 20px 14px;
+    box-shadow: var(--shadow);
+  }
+
+  /* chart */
+  svg text {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .axis-label {
+    fill: var(--ink-faint);
+    font-size: 10px;
+  }
+  .gridline {
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+  .chart-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .chart-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  th {
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td.num,
+  th.num {
+    text-align: right;
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  /* tutor bars */
+  .tutor-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 34px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 13.5px;
+  }
+  .tutor-name {
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tutor-track {
+    background: var(--rule);
+    border-radius: 3px;
+    height: 9px;
+    overflow: hidden;
+  }
+  .tutor-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--blue);
+  }
+  .tutor-count {
+    font-family: ui-monospace, monospace;
+    color: var(--ink-soft);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* narrative */
+  .narrative p {
+    margin: 0 0 14px;
+    font-size: 15px;
+  }
+  .narrative p:last-child {
+    margin-bottom: 0;
+  }
+  .pull {
+    border-left: 2px solid var(--gold);
+    padding-left: 16px;
+    margin: 20px 0;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 14.5px;
+  }
+
+  .phase-strip {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .phase {
+    flex: 1;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    padding: 10px 12px;
+    background: var(--paper-raised);
+  }
+  .phase .p-range {
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+  .phase .p-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    margin: 3px 0 2px;
+  }
+  .phase .p-desc {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card,
+    .stat {
+      transition: transform 0.15s ease;
+    }
+  }
+</style>
+
+<div class="page">
+  <div class="masthead">
+    <div class="eyebrow">CAMBLY LEARNING LOG<span class="dash"></span>2024.12 – 2025.06</div>
+    <h1>八十六节课的轨迹</h1>
+    <p class="subtitle">
+      从 2024 年 12 月 7 日到 2025 年 6 月 10 日，横跨 25 个教学账号、26 位老师和 41.75
+      小时通话，把每一次对话攒成一条曲线。
+    </p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">86</div>
+      <div class="label">完整课程</div>
+    </div>
+    <div class="stat">
+      <div class="num">41.75</div>
+      <div class="label">总通话小时</div>
+    </div>
+    <div class="stat">
+      <div class="num">91,101</div>
+      <div class="label">自己说出的词</div>
+    </div>
+    <div class="stat">
+      <div class="num">3,645</div>
+      <div class="label">用过的独立词汇</div>
+    </div>
+  </div>
+
+  <section id="sec-trend">
+    <div class="section-head">
+      <span class="no">01</span>
+      <h2>发言量曲线</h2>
+    </div>
+    <p class="section-sub">
+      每节课自己说出的词数,按时间顺序排列。虚线为 5
+      课移动平均,用来滤掉单节课的话题波动,看真实的趋势。
+    </p>
+    <div class="card">
+      <div id="trendChart"></div>
+      <div class="chart-legend">
+        <span><i class="dot" style="background: var(--blue)"></i>单节课发言词数</span>
+        <span><i class="dot" style="background: var(--gold)"></i>5 课移动平均</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-vocab">
+    <div class="section-head">
+      <span class="no">02</span>
+      <h2>词汇量增长</h2>
+    </div>
+    <p class="section-sub">
+      累计使用过的独立英文单词数(自己说的部分,已去除高频虚词)。前期涨得快,是因为常用词几乎都在头 20
+      节课里出现过;后期曲线变缓,说明日常对话的核心词汇已经基本覆盖,新增的多是话题性词汇。
+    </p>
+    <div class="card">
+      <div id="vocabChart"></div>
+    </div>
+  </section>
+
+  <section id="sec-phases">
+    <div class="section-head">
+      <span class="no">03</span>
+      <h2>三个阶段</h2>
+    </div>
+    <p class="section-sub">
+      按话题重心,把 86 节课分成三段。贯穿始终的一个词是 <strong>Australia</strong> ——
+      从最早的设想,到中段具体的城市和签证讨论,再到最后几节课的告别与出发。
+    </p>
+    <div class="phase-strip" id="phaseStrip"></div>
+  </section>
+
+  <section id="sec-monthly">
+    <div class="section-head">
+      <span class="no">04</span>
+      <h2>逐月数据</h2>
+    </div>
+    <p class="section-sub">每月课程数、发言总词数与平均每课词数。</p>
+    <div class="card table-wrap">
+      <table id="monthlyTable"></table>
+    </div>
+  </section>
+
+  <section id="sec-tutors">
+    <div class="section-head">
+      <span class="no">05</span>
+      <h2>老师分布</h2>
+    </div>
+    <p class="section-sub">
+      86 节完整课程覆盖了 25 个教学账号、26 位老师，其中 Peter 单人授课 31
+      节，占了三分之一强，是最主要的固定搭档。
+    </p>
+    <div class="card" id="tutorList"></div>
+  </section>
+
+  <section id="sec-narrative">
+    <div class="section-head">
+      <span class="no">06</span>
+      <h2>读出来的东西</h2>
+    </div>
+    <div class="card narrative">
+      <p>
+        头一个月(12 月)节奏很碎:17 节课分给了 14 位不同的老师,像是在到处试听,平均每课只说 718
+        个词,句子也短,常常是老师问一句、自己接一两个词。到 1 月,课程数降到 13 节,但发言量跳到人均
+        1136 词——开始有固定搭档(Ellie / BJ、Kenneth D
+        出现频率明显变高),对话不再是"被提问",而是能主动展开话题、追问细节。
+      </p>
+      <p>
+        2 月到 5 月这四个月几乎是一条平线:每月 13 节课,人均发言稳定在 1050–1120
+        词之间。这不是停滞,而是进入了平台期——词汇量的增速也在这一段明显放缓(见上图),说明日常对话所需的核心词汇已经打底完成,课堂精力转向了更具体的话题(咖啡、拜伦湾、工作、搬家计划)而不是"如何说出一句完整的话"。
+      </p>
+      <p>
+        6 月只有 5 节课,但人均发言飙到 1509 词,最后一节(6 月 10 日,Peter,60 分钟)单节说了 2475
+        词——是全程最高值,几乎是第一节课的 4
+        倍。这节课也确实是收尾:转写里能看到告别、总结六个月经历、以及对未来去向的长段独白。
+      </p>
+      <div class="pull">
+        "我一直试着不带着表演的样子活着——这就是我。" ——
+        摘自最后一节课的转写,老师在谈论真实与自我表达
+      </div>
+      <p>
+        25 个教学账号里，Peter 一人占了 31 节（36%），从 2
+        月中旬开始几乎固定为主力老师；其余大多数老师只出现 1
+        次，像是早期“试听式”探索的痕迹。这个分布本身就是学习方式转变的证据：从广泛尝试，收敛到一个稳定、有记忆、能追问上次话题的对话对象。
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span>86 lessons · 2024-12-07 → 2025-06-10</span>
+    <span>generated from lesson transcripts</span>
+  </footer>
+</div>
+
+<script>
+  const DATA = {
+    records: [
+      {
+        idx: 1,
+        date: "2024-12-07",
+        tutor: "Tutor Stephen",
+        student_words: 643,
+        tutor_words: 906,
+        student_turns: 126,
+        tutor_turns: 127,
+      },
+      {
+        idx: 2,
+        date: "2024-12-08",
+        tutor: "Sally HS",
+        student_words: 724,
+        tutor_words: 1248,
+        student_turns: 156,
+        tutor_turns: 164,
+      },
+      {
+        idx: 3,
+        date: "2024-12-08",
+        tutor: "Ned Browne",
+        student_words: 676,
+        tutor_words: 1630,
+        student_turns: 164,
+        tutor_turns: 156,
+      },
+      {
+        idx: 4,
+        date: "2024-12-12",
+        tutor: "Toks",
+        student_words: 388,
+        tutor_words: 1156,
+        student_turns: 104,
+        tutor_turns: 102,
+      },
+      {
+        idx: 5,
+        date: "2024-12-13",
+        tutor: "Ellie   BJ",
+        student_words: 1052,
+        tutor_words: 2641,
+        student_turns: 372,
+        tutor_turns: 372,
+      },
+      {
+        idx: 6,
+        date: "2024-12-14",
+        tutor: "Kenneth D",
+        student_words: 1142,
+        tutor_words: 2302,
+        student_turns: 339,
+        tutor_turns: 328,
+      },
+      {
+        idx: 7,
+        date: "2024-12-15",
+        tutor: "Jordan McMillin",
+        student_words: 445,
+        tutor_words: 940,
+        student_turns: 144,
+        tutor_turns: 143,
+      },
+      {
+        idx: 8,
+        date: "2024-12-15",
+        tutor: "Lynn Ferry",
+        student_words: 518,
+        tutor_words: 759,
+        student_turns: 176,
+        tutor_turns: 178,
+      },
+      {
+        idx: 9,
+        date: "2024-12-17",
+        tutor: "Kevin AN",
+        student_words: 182,
+        tutor_words: 61,
+        student_turns: 26,
+        tutor_turns: 15,
+      },
+      {
+        idx: 10,
+        date: "2024-12-17",
+        tutor: "Alex Yassin",
+        student_words: 454,
+        tutor_words: 895,
+        student_turns: 103,
+        tutor_turns: 104,
+      },
+      {
+        idx: 11,
+        date: "2024-12-19",
+        tutor: "Chris",
+        student_words: 477,
+        tutor_words: 1182,
+        student_turns: 107,
+        tutor_turns: 111,
+      },
+      {
+        idx: 12,
+        date: "2024-12-19",
+        tutor: "Kristopher Doyle",
+        student_words: 485,
+        tutor_words: 1357,
+        student_turns: 149,
+        tutor_turns: 149,
+      },
+      {
+        idx: 13,
+        date: "2024-12-19",
+        tutor: "Jordan Jenkins",
+        student_words: 547,
+        tutor_words: 994,
+        student_turns: 166,
+        tutor_turns: 167,
+      },
+      {
+        idx: 14,
+        date: "2024-12-21",
+        tutor: "Chris",
+        student_words: 494,
+        tutor_words: 967,
+        student_turns: 110,
+        tutor_turns: 107,
+      },
+      {
+        idx: 15,
+        date: "2024-12-23",
+        tutor: "Connie N",
+        student_words: 1241,
+        tutor_words: 1666,
+        student_turns: 328,
+        tutor_turns: 324,
+      },
+      {
+        idx: 16,
+        date: "2024-12-26",
+        tutor: "Chris",
+        student_words: 970,
+        tutor_words: 1924,
+        student_turns: 270,
+        tutor_turns: 258,
+      },
+      {
+        idx: 17,
+        date: "2024-12-31",
+        tutor: "Ellie   BJ",
+        student_words: 1767,
+        tutor_words: 3969,
+        student_turns: 589,
+        tutor_turns: 587,
+      },
+      {
+        idx: 18,
+        date: "2025-01-04",
+        tutor: "Kenneth D",
+        student_words: 929,
+        tutor_words: 2195,
+        student_turns: 312,
+        tutor_turns: 307,
+      },
+      {
+        idx: 19,
+        date: "2025-01-05",
+        tutor: "Amah Nsentip",
+        student_words: 534,
+        tutor_words: 1240,
+        student_turns: 130,
+        tutor_turns: 129,
+      },
+      {
+        idx: 20,
+        date: "2025-01-07",
+        tutor: "Kevin AN",
+        student_words: 1051,
+        tutor_words: 2161,
+        student_turns: 278,
+        tutor_turns: 278,
+      },
+      {
+        idx: 21,
+        date: "2025-01-09",
+        tutor: "Ellie   BJ",
+        student_words: 1300,
+        tutor_words: 2565,
+        student_turns: 397,
+        tutor_turns: 398,
+      },
+      {
+        idx: 22,
+        date: "2025-01-12",
+        tutor: "Kenneth D",
+        student_words: 1195,
+        tutor_words: 1874,
+        student_turns: 287,
+        tutor_turns: 286,
+      },
+      {
+        idx: 23,
+        date: "2025-01-15",
+        tutor: "Ellie   BJ",
+        student_words: 1257,
+        tutor_words: 2426,
+        student_turns: 407,
+        tutor_turns: 400,
+      },
+      {
+        idx: 24,
+        date: "2025-01-19",
+        tutor: "Anna",
+        student_words: 1257,
+        tutor_words: 1497,
+        student_turns: 235,
+        tutor_turns: 224,
+      },
+      {
+        idx: 25,
+        date: "2025-01-19",
+        tutor: "Jordan McMillin",
+        student_words: 873,
+        tutor_words: 2177,
+        student_turns: 243,
+        tutor_turns: 249,
+      },
+      {
+        idx: 26,
+        date: "2025-01-21",
+        tutor: "Kenneth D",
+        student_words: 1316,
+        tutor_words: 2338,
+        student_turns: 349,
+        tutor_turns: 348,
+      },
+      {
+        idx: 27,
+        date: "2025-01-24",
+        tutor: "Ellie   BJ",
+        student_words: 1179,
+        tutor_words: 1988,
+        student_turns: 328,
+        tutor_turns: 328,
+      },
+      {
+        idx: 28,
+        date: "2025-01-26",
+        tutor: "Ian Smith",
+        student_words: 1259,
+        tutor_words: 1982,
+        student_turns: 319,
+        tutor_turns: 320,
+      },
+      {
+        idx: 29,
+        date: "2025-01-29",
+        tutor: "Sally HS",
+        student_words: 1184,
+        tutor_words: 903,
+        student_turns: 218,
+        tutor_turns: 200,
+      },
+      {
+        idx: 30,
+        date: "2025-01-30",
+        tutor: "Tutor Mark",
+        student_words: 1439,
+        tutor_words: 2081,
+        student_turns: 327,
+        tutor_turns: 327,
+      },
+      {
+        idx: 31,
+        date: "2025-02-01",
+        tutor: "Chris",
+        student_words: 1564,
+        tutor_words: 1575,
+        student_turns: 278,
+        tutor_turns: 273,
+      },
+      {
+        idx: 32,
+        date: "2025-02-03",
+        tutor: "Kenneth D",
+        student_words: 1022,
+        tutor_words: 1966,
+        student_turns: 233,
+        tutor_turns: 234,
+      },
+      {
+        idx: 33,
+        date: "2025-02-05",
+        tutor: "Cillian Taaffe",
+        student_words: 1343,
+        tutor_words: 1680,
+        student_turns: 205,
+        tutor_turns: 201,
+      },
+      {
+        idx: 34,
+        date: "2025-02-06",
+        tutor: "Tutor Mark",
+        student_words: 894,
+        tutor_words: 2139,
+        student_turns: 232,
+        tutor_turns: 239,
+      },
+      {
+        idx: 35,
+        date: "2025-02-10",
+        tutor: "Peter",
+        student_words: 958,
+        tutor_words: 1641,
+        student_turns: 233,
+        tutor_turns: 237,
+      },
+      {
+        idx: 36,
+        date: "2025-02-12",
+        tutor: "Ellie   BJ",
+        student_words: 1027,
+        tutor_words: 2700,
+        student_turns: 361,
+        tutor_turns: 364,
+      },
+      {
+        idx: 37,
+        date: "2025-02-13",
+        tutor: "Tutor Mark",
+        student_words: 787,
+        tutor_words: 2222,
+        student_turns: 224,
+        tutor_turns: 230,
+      },
+      {
+        idx: 38,
+        date: "2025-02-18",
+        tutor: "Connie N",
+        student_words: 1166,
+        tutor_words: 1599,
+        student_turns: 268,
+        tutor_turns: 258,
+      },
+      {
+        idx: 39,
+        date: "2025-02-20",
+        tutor: "Ian Smith",
+        student_words: 856,
+        tutor_words: 1781,
+        student_turns: 239,
+        tutor_turns: 250,
+      },
+      {
+        idx: 40,
+        date: "2025-02-22",
+        tutor: "Ian Smith",
+        student_words: 926,
+        tutor_words: 2005,
+        student_turns: 276,
+        tutor_turns: 278,
+      },
+      {
+        idx: 41,
+        date: "2025-02-25",
+        tutor: "Peter",
+        student_words: 1231,
+        tutor_words: 1755,
+        student_turns: 252,
+        tutor_turns: 246,
+      },
+      {
+        idx: 42,
+        date: "2025-02-27",
+        tutor: "Tutor Mark",
+        student_words: 939,
+        tutor_words: 1643,
+        student_turns: 208,
+        tutor_turns: 204,
+      },
+      {
+        idx: 43,
+        date: "2025-02-27",
+        tutor: "Tutor Mark",
+        student_words: 988,
+        tutor_words: 1690,
+        student_turns: 215,
+        tutor_turns: 215,
+      },
+      {
+        idx: 44,
+        date: "2025-03-03",
+        tutor: "Peter",
+        student_words: 1064,
+        tutor_words: 2526,
+        student_turns: 234,
+        tutor_turns: 231,
+      },
+      {
+        idx: 45,
+        date: "2025-03-04",
+        tutor: "Connie N",
+        student_words: 1094,
+        tutor_words: 1828,
+        student_turns: 174,
+        tutor_turns: 165,
+      },
+      {
+        idx: 46,
+        date: "2025-03-06",
+        tutor: "Peter",
+        student_words: 680,
+        tutor_words: 2561,
+        student_turns: 164,
+        tutor_turns: 168,
+      },
+      {
+        idx: 47,
+        date: "2025-03-10",
+        tutor: "Peter",
+        student_words: 757,
+        tutor_words: 2625,
+        student_turns: 205,
+        tutor_turns: 210,
+      },
+      {
+        idx: 48,
+        date: "2025-03-12",
+        tutor: "Peter",
+        student_words: 1259,
+        tutor_words: 2201,
+        student_turns: 297,
+        tutor_turns: 286,
+      },
+      {
+        idx: 49,
+        date: "2025-03-14",
+        tutor: "Connie N",
+        student_words: 1263,
+        tutor_words: 1934,
+        student_turns: 225,
+        tutor_turns: 216,
+      },
+      {
+        idx: 50,
+        date: "2025-03-17",
+        tutor: "Peter",
+        student_words: 1197,
+        tutor_words: 1726,
+        student_turns: 216,
+        tutor_turns: 202,
+      },
+      {
+        idx: 51,
+        date: "2025-03-19",
+        tutor: "Peter",
+        student_words: 1284,
+        tutor_words: 2180,
+        student_turns: 270,
+        tutor_turns: 265,
+      },
+      {
+        idx: 52,
+        date: "2025-03-21",
+        tutor: "Susan Munro",
+        student_words: 1337,
+        tutor_words: 1477,
+        student_turns: 292,
+        tutor_turns: 287,
+      },
+      {
+        idx: 53,
+        date: "2025-03-24",
+        tutor: "Peter",
+        student_words: 1105,
+        tutor_words: 1884,
+        student_turns: 270,
+        tutor_turns: 260,
+      },
+      {
+        idx: 54,
+        date: "2025-03-26",
+        tutor: "Peter",
+        student_words: 1389,
+        tutor_words: 1673,
+        student_turns: 283,
+        tutor_turns: 276,
+      },
+      {
+        idx: 55,
+        date: "2025-03-27",
+        tutor: "Susan Munro",
+        student_words: 1247,
+        tutor_words: 1773,
+        student_turns: 278,
+        tutor_turns: 277,
+      },
+      {
+        idx: 56,
+        date: "2025-03-31",
+        tutor: "Peter",
+        student_words: 905,
+        tutor_words: 2066,
+        student_turns: 193,
+        tutor_turns: 191,
+      },
+      {
+        idx: 57,
+        date: "2025-04-02",
+        tutor: "Peter",
+        student_words: 862,
+        tutor_words: 1879,
+        student_turns: 209,
+        tutor_turns: 211,
+      },
+      {
+        idx: 58,
+        date: "2025-04-04",
+        tutor: "Susan Munro",
+        student_words: 968,
+        tutor_words: 1590,
+        student_turns: 277,
+        tutor_turns: 275,
+      },
+      {
+        idx: 59,
+        date: "2025-04-09",
+        tutor: "Peter",
+        student_words: 1306,
+        tutor_words: 1645,
+        student_turns: 326,
+        tutor_turns: 313,
+      },
+      {
+        idx: 60,
+        date: "2025-04-09",
+        tutor: "Ellie   BJ",
+        student_words: 1174,
+        tutor_words: 1409,
+        student_turns: 325,
+        tutor_turns: 313,
+      },
+      {
+        idx: 61,
+        date: "2025-04-12",
+        tutor: "Larry Wilson",
+        student_words: 1090,
+        tutor_words: 2083,
+        student_turns: 259,
+        tutor_turns: 248,
+      },
+      {
+        idx: 62,
+        date: "2025-04-16",
+        tutor: "Peter",
+        student_words: 1182,
+        tutor_words: 1954,
+        student_turns: 284,
+        tutor_turns: 276,
+      },
+      {
+        idx: 63,
+        date: "2025-04-16",
+        tutor: "Peter",
+        student_words: 931,
+        tutor_words: 2090,
+        student_turns: 221,
+        tutor_turns: 201,
+      },
+      {
+        idx: 64,
+        date: "2025-04-17",
+        tutor: "Susan Munro",
+        student_words: 1192,
+        tutor_words: 1554,
+        student_turns: 228,
+        tutor_turns: 219,
+      },
+      {
+        idx: 65,
+        date: "2025-04-22",
+        tutor: "Susan Munro",
+        student_words: 1361,
+        tutor_words: 1410,
+        student_turns: 262,
+        tutor_turns: 268,
+      },
+      {
+        idx: 66,
+        date: "2025-04-23",
+        tutor: "Peter",
+        student_words: 1308,
+        tutor_words: 1623,
+        student_turns: 240,
+        tutor_turns: 232,
+      },
+      {
+        idx: 67,
+        date: "2025-04-24",
+        tutor: "Peter",
+        student_words: 1164,
+        tutor_words: 2196,
+        student_turns: 324,
+        tutor_turns: 325,
+      },
+      {
+        idx: 68,
+        date: "2025-04-29",
+        tutor: "Peter",
+        student_words: 804,
+        tutor_words: 2717,
+        student_turns: 249,
+        tutor_turns: 248,
+      },
+      {
+        idx: 69,
+        date: "2025-04-30",
+        tutor: "Peter",
+        student_words: 1201,
+        tutor_words: 2459,
+        student_turns: 318,
+        tutor_turns: 323,
+      },
+      {
+        idx: 70,
+        date: "2025-05-02",
+        tutor: "Max White",
+        student_words: 1145,
+        tutor_words: 1878,
+        student_turns: 337,
+        tutor_turns: 336,
+      },
+      {
+        idx: 71,
+        date: "2025-05-07",
+        tutor: "Peter",
+        student_words: 1094,
+        tutor_words: 1774,
+        student_turns: 238,
+        tutor_turns: 230,
+      },
+      {
+        idx: 72,
+        date: "2025-05-08",
+        tutor: "Peter",
+        student_words: 1022,
+        tutor_words: 2462,
+        student_turns: 266,
+        tutor_turns: 263,
+      },
+      {
+        idx: 73,
+        date: "2025-05-11",
+        tutor: "Olivia",
+        student_words: 1200,
+        tutor_words: 2186,
+        student_turns: 254,
+        tutor_turns: 257,
+      },
+      {
+        idx: 74,
+        date: "2025-05-12",
+        tutor: "Peter",
+        student_words: 1223,
+        tutor_words: 1795,
+        student_turns: 301,
+        tutor_turns: 295,
+      },
+      {
+        idx: 75,
+        date: "2025-05-15",
+        tutor: "Peter",
+        student_words: 1178,
+        tutor_words: 2073,
+        student_turns: 291,
+        tutor_turns: 285,
+      },
+      {
+        idx: 76,
+        date: "2025-05-18",
+        tutor: "Olivia",
+        student_words: 1036,
+        tutor_words: 2170,
+        student_turns: 212,
+        tutor_turns: 213,
+      },
+      {
+        idx: 77,
+        date: "2025-05-20",
+        tutor: "Peter",
+        student_words: 0,
+        tutor_words: 0,
+        student_turns: 0,
+        tutor_turns: 0,
+      },
+      {
+        idx: 78,
+        date: "2025-05-22",
+        tutor: "Peter",
+        student_words: 1021,
+        tutor_words: 2446,
+        student_turns: 251,
+        tutor_turns: 249,
+      },
+      {
+        idx: 79,
+        date: "2025-05-23",
+        tutor: "Peter",
+        student_words: 1288,
+        tutor_words: 2658,
+        student_turns: 343,
+        tutor_turns: 349,
+      },
+      {
+        idx: 80,
+        date: "2025-05-27",
+        tutor: "Peter",
+        student_words: 715,
+        tutor_words: 1623,
+        student_turns: 224,
+        tutor_turns: 234,
+      },
+      {
+        idx: 81,
+        date: "2025-05-29",
+        tutor: "Peter",
+        student_words: 1540,
+        tutor_words: 1856,
+        student_turns: 378,
+        tutor_turns: 377,
+      },
+      {
+        idx: 82,
+        date: "2025-05-31",
+        tutor: "Jeremy",
+        student_words: 1293,
+        tutor_words: 2358,
+        student_turns: 374,
+        tutor_turns: 366,
+      },
+      {
+        idx: 83,
+        date: "2025-06-05",
+        tutor: "Peter",
+        student_words: 1242,
+        tutor_words: 1595,
+        student_turns: 254,
+        tutor_turns: 241,
+      },
+      {
+        idx: 84,
+        date: "2025-06-06",
+        tutor: "Peter",
+        student_words: 1416,
+        tutor_words: 1767,
+        student_turns: 335,
+        tutor_turns: 329,
+      },
+      {
+        idx: 85,
+        date: "2025-06-08",
+        tutor: "Olivia",
+        student_words: 1309,
+        tutor_words: 1718,
+        student_turns: 215,
+        tutor_turns: 210,
+      },
+      {
+        idx: 86,
+        date: "2025-06-09",
+        tutor: "Sally HS",
+        student_words: 1101,
+        tutor_words: 1646,
+        student_turns: 199,
+        tutor_turns: 201,
+      },
+      {
+        idx: 87,
+        date: "2025-06-10",
+        tutor: "Peter",
+        student_words: 2475,
+        tutor_words: 3666,
+        student_turns: 455,
+        tutor_turns: 439,
+      },
+    ],
+    monthly: {
+      "2024-12": { lessons: 17, words: 12205, turns: 3429, vocab: 1295 },
+      "2025-01": { lessons: 13, words: 14773, turns: 3830, vocab: 1466 },
+      "2025-02": { lessons: 13, words: 13701, turns: 3224, vocab: 1420 },
+      "2025-03": { lessons: 13, words: 14581, turns: 3101, vocab: 1359 },
+      "2025-04": { lessons: 13, words: 14543, turns: 3522, vocab: 1396 },
+      "2025-05": { lessons: 13, words: 13755, turns: 3469, vocab: 1391 },
+      "2025-06": { lessons: 5, words: 7543, turns: 1458, vocab: 965 },
+    },
+    cum_vocab: [
+      [1, "2024-12-07", 200],
+      [2, "2024-12-08", 359],
+      [3, "2024-12-08", 462],
+      [4, "2024-12-12", 517],
+      [5, "2024-12-13", 645],
+      [6, "2024-12-14", 778],
+      [7, "2024-12-15", 818],
+      [8, "2024-12-15", 859],
+      [9, "2024-12-17", 882],
+      [10, "2024-12-17", 920],
+      [11, "2024-12-19", 967],
+      [12, "2024-12-19", 1005],
+      [13, "2024-12-19", 1043],
+      [14, "2024-12-21", 1071],
+      [15, "2024-12-23", 1152],
+      [16, "2024-12-26", 1201],
+      [17, "2024-12-31", 1295],
+      [18, "2025-01-04", 1348],
+      [19, "2025-01-05", 1378],
+      [20, "2025-01-07", 1433],
+      [21, "2025-01-09", 1467],
+      [22, "2025-01-12", 1556],
+      [23, "2025-01-15", 1642],
+      [24, "2025-01-19", 1695],
+      [25, "2025-01-19", 1748],
+      [26, "2025-01-21", 1804],
+      [27, "2025-01-24", 1854],
+      [28, "2025-01-26", 1902],
+      [29, "2025-01-29", 1962],
+      [30, "2025-01-30", 2006],
+      [31, "2025-02-01", 2065],
+      [32, "2025-02-03", 2120],
+      [33, "2025-02-05", 2164],
+      [34, "2025-02-06", 2199],
+      [35, "2025-02-10", 2231],
+      [36, "2025-02-12", 2297],
+      [37, "2025-02-13", 2343],
+      [38, "2025-02-18", 2371],
+      [39, "2025-02-20", 2396],
+      [40, "2025-02-22", 2456],
+      [41, "2025-02-25", 2485],
+      [42, "2025-02-27", 2503],
+      [43, "2025-02-27", 2532],
+      [44, "2025-03-03", 2548],
+      [45, "2025-03-04", 2570],
+      [46, "2025-03-06", 2584],
+      [47, "2025-03-10", 2616],
+      [48, "2025-03-12", 2650],
+      [49, "2025-03-14", 2674],
+      [50, "2025-03-17", 2716],
+      [51, "2025-03-19", 2746],
+      [52, "2025-03-21", 2774],
+      [53, "2025-03-24", 2811],
+      [54, "2025-03-26", 2843],
+      [55, "2025-03-27", 2871],
+      [56, "2025-03-31", 2885],
+      [57, "2025-04-02", 2912],
+      [58, "2025-04-04", 2947],
+      [59, "2025-04-09", 2985],
+      [60, "2025-04-09", 3011],
+      [61, "2025-04-12", 3038],
+      [62, "2025-04-16", 3068],
+      [63, "2025-04-16", 3089],
+      [64, "2025-04-17", 3116],
+      [65, "2025-04-22", 3140],
+      [66, "2025-04-23", 3161],
+      [67, "2025-04-24", 3185],
+      [68, "2025-04-29", 3202],
+      [69, "2025-04-30", 3236],
+      [70, "2025-05-02", 3258],
+      [71, "2025-05-07", 3297],
+      [72, "2025-05-08", 3325],
+      [73, "2025-05-11", 3332],
+      [74, "2025-05-12", 3354],
+      [75, "2025-05-15", 3365],
+      [76, "2025-05-18", 3387],
+      [77, "2025-05-20", 3387],
+      [78, "2025-05-22", 3418],
+      [79, "2025-05-23", 3441],
+      [80, "2025-05-27", 3461],
+      [81, "2025-05-29", 3492],
+      [82, "2025-05-31", 3517],
+      [83, "2025-06-05", 3549],
+      [84, "2025-06-06", 3580],
+      [85, "2025-06-08", 3602],
+      [86, "2025-06-09", 3616],
+      [87, "2025-06-10", 3645],
+    ],
+    tutor_counts: {
+      "Tutor Stephen": 1,
+      "Sally HS": 3,
+      "Ned Browne": 1,
+      Toks: 1,
+      "Ellie   BJ": 7,
+      "Kenneth D": 5,
+      "Jordan McMillin": 2,
+      "Lynn Ferry": 1,
+      "Kevin AN": 2,
+      "Alex Yassin": 1,
+      Chris: 4,
+      "Kristopher Doyle": 1,
+      "Jordan Jenkins": 1,
+      "Connie N": 4,
+      "Amah Nsentip": 1,
+      Anna: 1,
+      "Ian Smith": 3,
+      "Tutor Mark": 5,
+      "Cillian Taaffe": 1,
+      Peter: 31,
+      "Susan Munro": 5,
+      "Larry Wilson": 1,
+      "Max White": 1,
+      Olivia: 3,
+      Jeremy: 1,
+    },
+    total_student_words: 91101,
+    total_tutor_words: 161154,
+  };
+
+  function css(v) {
+    return getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  }
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // ---- trend chart (per-lesson student words + moving average) ----
+  (function () {
+    const recs = DATA.records;
+    const W = 800,
+      H = 240,
+      padL = 40,
+      padR = 14,
+      padT = 14,
+      padB = 26;
+    const innerW = W - padL - padR,
+      innerH = H - padT - padB;
+    const maxY = Math.max(...recs.map((r) => r.student_words)) * 1.08;
+    const n = recs.length;
+    const x = (i) => padL + (innerW * i) / (n - 1);
+    const y = (v) => padT + innerH - (innerH * v) / maxY;
+
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", height: "auto", role: "img" });
+    svg.style.display = "block";
+
+    // gridlines
+    [0, 0.5, 1].forEach((f) => {
+      const gy = padT + innerH * (1 - f);
+      el("line", { x1: padL, x2: W - padR, y1: gy, y2: gy, class: "gridline" }, svg);
+      const t = el("text", { x: 6, y: gy + 3, class: "axis-label" }, svg);
+      t.textContent = Math.round(maxY * f);
+    });
+
+    // month tick labels (first lesson of each displayed month)
+    let lastMonth = "";
+    recs.forEach((r, i) => {
+      const m = r.date.slice(0, 7);
+      if (m !== lastMonth) {
+        lastMonth = m;
+        const t = el(
+          "text",
+          { x: x(i), y: H - 8, class: "axis-label", "text-anchor": "middle" },
+          svg,
+        );
+        t.textContent = m.slice(2).replace("-", "/");
+      }
+    });
+
+    // bars for raw values
+    recs.forEach((r, i) => {
+      if (r.student_words === 0) return;
+      const bx = x(i);
+      const by = y(r.student_words);
+      el(
+        "line",
+        {
+          x1: bx,
+          x2: bx,
+          y1: by,
+          y2: padT + innerH,
+          stroke: css("--blue-soft"),
+          "stroke-width": Math.max(2, (innerW / n) * 0.55),
+        },
+        svg,
+      );
+    });
+
+    // moving average line (window 5)
+    const win = 5;
+    const pts = recs.map((r, i) => {
+      const lo = Math.max(0, i - win + 1);
+      const slice = recs.slice(lo, i + 1).filter((r) => r.student_words > 0);
+      const avg = slice.length ? slice.reduce((a, b) => a + b.student_words, 0) / slice.length : 0;
+      return [x(i), y(avg)];
+    });
+    const path = "M" + pts.map((p) => p.join(",")).join(" L");
+    el(
+      "path",
+      {
+        d: path,
+        fill: "none",
+        stroke: css("--gold"),
+        "stroke-width": 2.4,
+        "stroke-linejoin": "round",
+      },
+      svg,
+    );
+
+    document.getElementById("trendChart").appendChild(svg);
+  })();
+
+  // ---- vocab growth chart ----
+  (function () {
+    const pts = DATA.cum_vocab;
+    const W = 800,
+      H = 200,
+      padL = 44,
+      padR = 14,
+      padT = 14,
+      padB = 26;
+    const innerW = W - padL - padR,
+      innerH = H - padT - padB;
+    const maxY = pts[pts.length - 1][2] * 1.08;
+    const n = pts.length;
+    const x = (i) => padL + (innerW * i) / (n - 1);
+    const y = (v) => padT + innerH - (innerH * v) / maxY;
+
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", height: "auto" });
+    svg.style.display = "block";
+
+    [0, 0.5, 1].forEach((f) => {
+      const gy = padT + innerH * (1 - f);
+      el("line", { x1: padL, x2: W - padR, y1: gy, y2: gy, class: "gridline" }, svg);
+      const t = el("text", { x: 6, y: gy + 3, class: "axis-label" }, svg);
+      t.textContent = Math.round(maxY * f);
+    });
+
+    let lastMonth = "";
+    pts.forEach((p, i) => {
+      const m = p[1].slice(0, 7);
+      if (m !== lastMonth) {
+        lastMonth = m;
+        const t = el(
+          "text",
+          { x: x(i), y: H - 8, class: "axis-label", "text-anchor": "middle" },
+          svg,
+        );
+        t.textContent = m.slice(2).replace("-", "/");
+      }
+    });
+
+    const areaPts = pts.map((p, i) => [x(i), y(p[2])]);
+    const areaPath =
+      "M" +
+      areaPts.map((p) => p.join(",")).join(" L") +
+      ` L${x(n - 1)},${padT + innerH} L${padL},${padT + innerH} Z`;
+    el("path", { d: areaPath, fill: css("--blue-soft"), stroke: "none" }, svg);
+    const linePath = "M" + areaPts.map((p) => p.join(",")).join(" L");
+    el("path", { d: linePath, fill: "none", stroke: css("--blue"), "stroke-width": 2.2 }, svg);
+
+    // endpoint marker
+    const last = areaPts[areaPts.length - 1];
+    el("circle", { cx: last[0], cy: last[1], r: 4, fill: css("--blue") }, svg);
+    const lt = el(
+      "text",
+      {
+        x: last[0] - 6,
+        y: last[1] - 10,
+        class: "axis-label",
+        "text-anchor": "end",
+        fill: css("--blue"),
+      },
+      svg,
+    );
+    lt.textContent = pts[pts.length - 1][2];
+
+    document.getElementById("vocabChart").appendChild(svg);
+  })();
+
+  // ---- phase strip ----
+  (function () {
+    const phases = [
+      {
+        range: "第 1–30 课 · 12月–1月",
+        name: "广泛试听",
+        desc: "17 位不同老师,短句为主,平均 718–1136 词/课",
+      },
+      {
+        range: "第 31–65 课 · 2月–4月",
+        name: "稳定期",
+        desc: "固定搭档成型,词汇增速放缓,话题转向具体生活",
+      },
+      {
+        range: "第 66–87 课 · 5月–6月",
+        name: "收尾与告别",
+        desc: "谈论朋友、离别与去向,末课发言量达全程峰值",
+      },
+    ];
+    const wrap = document.getElementById("phaseStrip");
+    phases.forEach((p) => {
+      const d = document.createElement("div");
+      d.className = "phase";
+      d.innerHTML = `<div class="p-range">${p.range}</div><div class="p-name">${p.name}</div><div class="p-desc">${p.desc}</div>`;
+      wrap.appendChild(d);
+    });
+  })();
+
+  // ---- monthly table ----
+  (function () {
+    const months = Object.keys(DATA.monthly).sort();
+    const tbl = document.getElementById("monthlyTable");
+    let html =
+      '<thead><tr><th>月份</th><th class="num">课程数</th><th class="num">发言总词数</th><th class="num">平均词数/课</th><th class="num">新增词汇</th></tr></thead><tbody>';
+    months.forEach((m) => {
+      const d = DATA.monthly[m];
+      html += `<tr><td>${m}</td><td class="num">${d.lessons}</td><td class="num">${d.words.toLocaleString()}</td><td class="num">${Math.round(d.words / d.lessons)}</td><td class="num">${d.vocab}</td></tr>`;
+    });
+    html += "</tbody>";
+    tbl.innerHTML = html;
+  })();
+
+  // ---- tutor list ----
+  (function () {
+    const entries = Object.entries(DATA.tutor_counts).sort((a, b) => b[1] - a[1]);
+    const max = entries[0][1];
+    const wrap = document.getElementById("tutorList");
+    entries.forEach(([name, count]) => {
+      const row = document.createElement("div");
+      row.className = "tutor-row";
+      row.innerHTML = `<div class="tutor-name">${name.replace(/\s+/g, " ").trim()}</div><div class="tutor-track"><div class="tutor-fill" style="width:${((count / max) * 100).toFixed(0)}%"></div></div><div class="tutor-count">${count}</div>`;
+      wrap.appendChild(row);
+    });
+  })();
+</script>

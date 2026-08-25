@@ -4,9 +4,9 @@ import learnerImage from "@/assets/memoir-learner.jpg";
 import notesImage from "@/assets/memoir-notes.jpg";
 
 export const site = {
-  title: "与世界连上线的半年",
-  subtitle: "我在 Cambly 学英语的一段回忆录",
-  period: "2025 年冬 — 2026 年夏",
+  title: "连接世界的半年",
+  subtitle: "我在 Cambly 学英语的回忆录",
+  period: "2024 年冬 — 2025 年夏",
 };
 
 export type Chapter = {
@@ -27,7 +27,12 @@ export type Chapter = {
   imageAlt: string;
   figure: string;
   meta: string[];
-  stat: { value: string; label: string };
+  stat: {
+    value: string;
+    label: string;
+    secondaryValue?: string;
+    secondaryLabel?: string;
+  };
   align: "image-left" | "image-right";
 };
 
@@ -37,31 +42,37 @@ export const chapters: Chapter[] = [
     index: "\n",
     label: "开场",
     headline: site.title,
-    line: "我在 Cambly 学英语的一段回忆录\u00a0",
+    line: site.subtitle,
     tint: [0.93, 0.92, 0.85],
-    deep: [0.64, 0.70, 0.62],
+    deep: [0.64, 0.7, 0.62],
     reveal: "wipe",
     image: deskImage,
     imageAlt: "书桌上的笔记本电脑、手写笔记与咖啡",
     figure: "FIG. 00 — THE CONNECTION",
     meta: ["ARCHIVE: CAMBLY H1", "STATUS: OPENING FRAME"],
-    stat: { value: "180", label: "days of conversation" },
+    stat: {
+      value: "86",
+      label: "CONVERSATIONS",
+      secondaryValue: "26",
+      secondaryLabel: "Teachers",
+    },
     align: "image-right",
   },
   {
     id: "start",
     index: "01",
-    label: "起点",
-    headline: "第一次连线",
-    line: "十五分钟，说了不到十句话，却记了一整页。",
-    tint: [0.88, 0.90, 0.86],
+    label: "故事",
+    headline: "我们的故事",
+    line: "记录 Cambly 这半年里，九段真正留下痕迹的关系",
+    tint: [0.88, 0.9, 0.86],
     deep: [0.45, 0.55, 0.58],
+    media: "none",
     reveal: "curtain",
     image: learnerImage,
     imageAlt: "窗边使用电脑练习英语的学习者",
     figure: "FIG. 01 — FIRST CONTACT",
     meta: ["ENTRY ID: WINTER-001", "MODE: ORAL PRACTICE"],
-    stat: { value: "10", label: "words, more or less" },
+    stat: { value: "09", label: "relationships remembered" },
     align: "image-left",
   },
   {
@@ -70,8 +81,8 @@ export const chapters: Chapter[] = [
     label: "轨迹",
     headline: "半年的节奏",
     line: "从每周三次，到几乎每天；从背句子，到忘记自己在说外语。",
-    tint: [0.90, 0.87, 0.78],
-    deep: [0.40, 0.50, 0.42],
+    tint: [0.9, 0.87, 0.78],
+    deep: [0.4, 0.5, 0.42],
     reveal: "slats",
     media: "placeholder",
     image: notesImage,
@@ -88,7 +99,7 @@ export const chapters: Chapter[] = [
     headline: "那些留下来的句子",
     line: "有人纠正我的时态，也有人问我家乡的雨季。",
     tint: [0.85, 0.88, 0.92],
-    deep: [0.30, 0.38, 0.55],
+    deep: [0.3, 0.38, 0.55],
     reveal: "iris",
     media: "none",
     image: deskImage,
@@ -104,8 +115,8 @@ export const chapters: Chapter[] = [
     label: "生长",
     headline: "语言之外的东西",
     line: "英语只是介质，真正变了的是我敢不敢开口。",
-    tint: [0.94, 0.90, 0.82],
-    deep: [0.52, 0.60, 0.48],
+    tint: [0.94, 0.9, 0.82],
+    deep: [0.52, 0.6, 0.48],
     reveal: "tilt",
     media: "placeholder",
     image: learnerImage,
@@ -115,18 +126,4 @@ export const chapters: Chapter[] = [
     stat: { value: "∞", label: "connections ahead" },
     align: "image-right",
   },
-];
-
-export type Entry = {
-  to: string;
-  index: string;
-  label: string;
-  hint: string;
-};
-
-export const entries: Entry[] = [
-  { to: "/journey", index: "Ⅰ", label: "学习轨迹", hint: "半年的时间线" },
-  { to: "/dialogues", index: "Ⅱ", label: "对话记录", hint: "留下来的片段" },
-  { to: "/growth", index: "Ⅲ", label: "我的成长", hint: "反思与变化" },
-  { to: "/notes", index: "Ⅳ", label: "零散记录", hint: "词句与随想" },
 ];

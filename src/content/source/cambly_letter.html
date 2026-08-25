@@ -1,0 +1,640 @@
+<title>写给 Lou 的信</title>
+<style>
+  :root {
+    --paper: #f2ecdd;
+    --paper-raised: #fbf7ec;
+    --ink: #2b2620;
+    --ink-soft: #6b6154;
+    --ink-faint: #9c9282;
+    --rule: rgba(43, 38, 32, 0.16);
+    --rule-strong: rgba(43, 38, 32, 0.32);
+    --red: #9c3b2e;
+    --red-soft: #9c3b2e1f;
+    --blue: #34506b;
+    --blue-soft: #34506b22;
+    --shadow: 0 1px 2px rgba(43, 38, 32, 0.08), 0 10px 28px -18px rgba(43, 38, 32, 0.35);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1d1a15;
+      --paper-raised: #24211b;
+      --ink: #ede6d6;
+      --ink-soft: #b7ae9b;
+      --ink-faint: #857c6b;
+      --rule: rgba(237, 230, 214, 0.16);
+      --rule-strong: rgba(237, 230, 214, 0.32);
+      --red: #d98a78;
+      --red-soft: #d98a7826;
+      --blue: #8fb0cc;
+      --blue-soft: #8fb0cc26;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px -18px rgba(0, 0, 0, 0.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1d1a15;
+    --paper-raised: #24211b;
+    --ink: #ede6d6;
+    --ink-soft: #b7ae9b;
+    --ink-faint: #857c6b;
+    --rule: rgba(237, 230, 214, 0.16);
+    --rule-strong: rgba(237, 230, 214, 0.32);
+    --red: #d98a78;
+    --red-soft: #d98a7826;
+    --blue: #8fb0cc;
+    --blue-soft: #8fb0cc26;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px -18px rgba(0, 0, 0, 0.7);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 28px 100px;
+  }
+
+  /* header: envelope-style fields */
+  .postmark {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+  }
+  .postmark .field b {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .stamp {
+    width: 54px;
+    height: 54px;
+    border: 1.5px dashed var(--rule-strong);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--blue);
+    font-size: 9px;
+    text-align: center;
+    line-height: 1.3;
+    font-family: ui-monospace, monospace;
+  }
+
+  h1.greeting {
+    font-family: "Songti SC", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 32px);
+    margin: 0 0 30px;
+    text-wrap: balance;
+  }
+
+  .letter-body p {
+    margin: 0 0 20px;
+    font-size: 16px;
+  }
+  .letter-body p.indent {
+    text-indent: 2em;
+  }
+
+  .date-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 44px 0 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.04em;
+  }
+  .date-mark .line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .date-mark .lesson-no {
+    color: var(--ink-faint);
+  }
+
+  blockquote {
+    margin: 18px 0 22px;
+    padding: 14px 18px;
+    border-left: 2px solid var(--blue);
+    background: var(--blue-soft);
+    border-radius: 0 6px 6px 0;
+    font-family: Georgia, "Iowan Old Style", serif;
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  blockquote .line {
+    margin: 0 0 4px;
+  }
+  blockquote .line:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .silence {
+    text-align: center;
+    color: var(--ink-faint);
+    font-style: italic;
+    font-size: 14px;
+    margin: 30px 0;
+    padding: 18px 0;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+  }
+
+  .divider-stamp {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    color: var(--rule-strong);
+  }
+
+  .closing {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .closing .sign {
+    font-family: "Songti SC", Georgia, serif;
+    font-size: 20px;
+    margin-top: 18px;
+  }
+  .closing .sub {
+    font-family: ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  .stat-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 8px 0 0;
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .stat-line b {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+
+<div class="sheet">
+  <div class="postmark">
+    <div class="field">
+      FROM <b>Cambly</b><br />TO <b>Lou</b><br />RE <b>86 场谈话,26 位老师,41.75 小时</b>
+    </div>
+    <div class="stamp">CAMBLY<br />2024·12—<br />2025·06</div>
+  </div>
+
+  <h1 class="greeting">亲爱的 Lou:</h1>
+
+  <div class="letter-body">
+    <p class="indent">
+      我是记录着这一切的地方。从 2024 年 12 月 7 日到 2025 年 6 月 10 日,你在这里上了 86
+      节课,留下的每一句话我都还留着——包括说得磕磕绊绊的那些,包括你自己可能都不记得说过的那些。现在,趁着你要出发去澳大利亚了,我想把这些日子重新念一遍给你听。不是用数据念,数据我已经给过你了;这一次,我想用你自己说过的话,原原本本地,念给你听。
+    </p>
+    <p class="indent">
+      如果把 86
+      节课摊开在时间线上,会看到一件很有意思的事:这根本不是一份"学英语"的记录。这是一个人一边练习发音,一边把自己人生里最大的一次转弯,讲给一个又一个陌生人听的记录。他们大多只见过你一次,却比很多认识你很久的人,更早知道你要离开深圳、离开律师这个身份、去一个完全陌生的国家重新开始。
+    </p>
+    <p class="indent">
+      这封信不是按老师分类,也不是按数字统计的——那些我已经在另一份总结里给过你了。这一次,我想按时间,一天一天地,把发生过的事、说过的话,原样摆在你面前。有些是重要的转折,有些只是一句无关紧要的闲聊,但我把它们都留着,因为我没办法替你决定,哪一句话,后来变得重要。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 1 课</span><span class="line"></span>2024-12-07 · Tutor Stephen ·
+      15 分钟
+    </div>
+    <p class="indent">
+      你上的第一节课只有十五分钟。老师问你好不好,你说的第一句完整的话是"boring"——因为感冒了,过了几天无聊的日子。他问你叫什么名字,你说:
+    </p>
+    <blockquote>
+      <span class="line">"my name is Lawrence Lawrence"</span>
+    </blockquote>
+    <p class="indent">
+      你在 Cambly 的第一个名字是 Lawrence。后来你才慢慢变成了
+      Lou——这个后来所有老师都用来叫你的名字。没人告诉你什么时候换的,它就那样自然地发生了,像口音会慢慢磨掉一样。第一节课的最后,你补了一句解释:感冒了,这几天过得很无聊。老师听完只是说"Ah,
+      cool! Ah,
+      Shenzhen!",然后聊起深圳到香港坐高铁只要四十分钟。那是你留在这里的第一段闲聊——普通到不能再普通,但正因为普通,才显得后面发生的一切格外不普通。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 2 课</span><span class="line"></span>2024-12-08 · Sally HS
+    </div>
+    <p class="indent">
+      第二节课,你迟到了,一进来就喘着气道歉:"sorry for late, I was wrong, so fast as I can... I miss
+      the subway." 那天晚上十一点,你刚在酒吧看完一场电影,喝了点酒,赶地铁没赶上,跑着来上这堂课。Sally
+      让你先喘口气:"Catch your breath. Breathe."
+      这大概是这段记录里最不像"立志改变人生"的一幕——一个深夜微醺、连课都差点赶不上的普通人。但正是这种普通,让后面发生的所有事,显得更真实。
+    </p>
+
+    <div class="date-mark"><span class="line"></span>2024 年 12 月</div>
+    <p class="indent">
+      头三周你几乎没有重复找过同一个人:Tutor Stephen、Sally HS、Ned Browne、Toks、Ellie /
+      BJ、Kenneth D、Jordan McMillin、Lynn Ferry、Kevin AN、Alex
+      Yassin……十七节课,十四张不同的脸。像是在到处敲门,还没决定要在哪一间屋子里坐下来。那时候你说话很短,常常是老师问一句,你答一两个词,句子中间充满停顿。有一节课特别短——你和
+      Kevin AN
+      只聊了二十六个回合,你说的话加起来还不到两百个词,课就结束了。没关系,那本来就是开始该有的样子:先笨拙地开口,再慢慢学会怎么把一句话说完整。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 15 课</span><span class="line"></span>2024-12-23 · Connie N
+    </div>
+    <p class="indent">
+      圣诞前夜的前一天,你第一次在这里说出"要去澳大利亚"这件事。Connie 听完,说了这样一句话:
+    </p>
+    <blockquote>
+      <span class="line">"You're going to Australia. That's a gift."</span>
+    </blockquote>
+    <p class="indent">
+      一个素未谋面、隔着屏幕教你英语的人,把你人生里最大的一个决定,当成了她圣诞夜收到的礼物。你可能没意识到,这是这条记录线上第一次有人替你高兴。那节课你还提到自己是律师、正准备转行——这大概是你第一次对一个陌生人完整地说出"律师"和"澳大利亚"这两个词放在一起是什么意思。后来我查过
+      Connie
+      的资料,她是专业社工,教育背景专攻"儿童发展与家庭关系"——她后来能给你那些关于家人的建议,原来不是随口一说,是她的专业本身。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 16 课</span><span class="line"></span>2024-12-26 · Chris
+    </div>
+    <p class="indent">
+      "Merry Christmas." "Well, Christmas was yesterday, now it's Boxing Day."
+      你学会了一个新词,拆礼物剩下的纸箱子第二天要清出去——这是那种最没用又最忘不掉的知识,像所有真正的对话课都会顺便教你的东西。你在这一个月里换了十几张脸,但每一次都愿意重新自我介绍一遍,愿意重新把"我要去澳大利亚"这句话再说一遍。后来回头看,这种不厌其烦,可能才是这大半年真正的底色。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 17 课</span><span class="line"></span>2024-12-31 · Ellie / BJ · 45
+      分钟
+    </div>
+    <p class="indent">跨年前的最后一课,四十五分钟,是当时最长的一次。你把计划说得更肯定了一点:</p>
+    <blockquote>
+      <span class="line">"so I can go to Australia next year in 2025."</span>
+    </blockquote>
+    <p class="indent">
+      Ellie 回了你一句 "Happy new year. And wishing you a great 2025."
+      那时候签证还没有,工作也还没辞,一切都只是一句说出口的话。但说出口的话,后来都变成真的了——这大概是这封信里最想让你看到的一件事:你不是先辞职、拿到签证,才开始跟人说这个计划的;你是先在这里,一遍一遍地对着不同的陌生人说出来,然后它才慢慢变成真的。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 27 课</span><span class="line"></span>2025-01-24 · Ellie / BJ
+    </div>
+    <p class="indent">
+      春节前,你说要回郴州。老师问,是要去看家人,还是见见老朋友。你说这几天城市"quiet"——很多人这几天都不在深圳了。那是你在这些记录里唯一一次提到"回家"这个方向,和"去澳大利亚"那个方向,正好相反。一月份里,Kenneth
+      D、Ellie / BJ
+      这些名字开始反复出现——你已经不再是那个每次都要重新自我介绍的人了,你开始有了"常去的地方"。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 39 课</span><span class="line"></span>2025-02-20 · Ian Smith
+    </div>
+    <p class="indent">
+      这一课信息量很大。开场 Ian 说,好像有一个月没见了,问你最近在干嘛。你说:"just kick back at my
+      house... enjoy the days far from the
+      world."——然后才说,你已经把工作"suspend"了。后来才说清楚,其实是辞职。你是律师,律师这个身份从这一天起开始慢慢往后退。你说签证"soon,
+      it will be soon... maybe this weekend",计划十月出发,正在"improving my English and learning
+      more Australian culture as much as I can"。
+    </p>
+    <p class="indent">
+      然后你们聊起澳洲人喝咖啡的文化,你说你也许可以去做 barista。你把这个词说成了
+      barrister——律师。Ian 花了整整两分钟纠正你的重音:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"a lawyer is a barrister with a stress on the first, and barista in the cafe, stress on the
+        second."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你反反复复念了十几遍这两个词,始终没能把重音放对。一个是律师,一个是咖啡师,你把自己的过去和未来,叠在了同一个发音错误里,自己可能都没察觉——但我记下来了。
+    </p>
+
+    <div class="date-mark"><span class="line"></span>2025 年 2 月底</div>
+    <p class="indent">
+      工作签证下来了。你后来告诉 Peter,是"last Friday"——granted,你一开始说成了
+      guaranteed,他也没有太纠正,只是笑着说"congratulations"。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 44 课</span><span class="line"></span>2025-03-03 · Peter
+    </div>
+    <p class="indent">
+      这是你和 Peter 真正开始熟悉起来的一课。你告诉他签证批下来了,他说了这样一段话:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"No matter how much you prepare it, it will be different when you actually arrive... it's
+        going to come down to really your personal confidence, or how brave you are to actually talk
+        to strangers... Just dive in — don't wait. Don't just put your foot in, you've got to run in
+        and jump."</span
+      >
+    </blockquote>
+    <p class="indent">你回了一句很少见的、没有绕弯子的话:</p>
+    <blockquote>
+      <span class="line">"I'm not too confident. I'm not a very confident person."</span>
+    </blockquote>
+    <p class="indent">
+      这大概是 86 节课里,你最坦白的一句自我描述。Peter
+      接着讲了一个真实的对比:他见过很多去澳洲的东南亚年轻人,一半真正走出去、和当地人交朋友,英语突飞猛进;另一半只和其他外国留学生扎堆,一年之后回国,说"我好像没学到什么"。你听完说:"it's
+      like immersive experience... you are part of community." 他说,对,就是这个意思。
+    </p>
+    <p class="indent">
+      那天你们把珀斯、悉尼、墨尔本一个个摊开在地图上讨论。Peter
+      说他自己的家人在珀斯——妈妈、哥哥、姐姐都在那里,爸爸在布里斯班,但他建议你从更大、更容易找到工作和住处的城市开始。你说,你想先熟悉这个国家,再去大城市——"from
+      small city or middle city to big city. It's a
+      process."。你们还顺手查了澳大利亚和中国的人口——十四亿对两千五百万——和国土面积几乎相当。Peter
+      说,正因为这样,小城市有时候反而更难找到工作。从那天起,Peter 变成了你最常见的人,86
+      节课里,他一个人占了 31 节,超过三分之一。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 47 课</span><span class="line"></span>2025-03-10 · Peter
+    </div>
+    <p class="indent">
+      这一课你带来一个消息:周末去参加了老朋友的婚礼,收到了请柬。日常生活还在照常往前走——朋友结婚、周一开始新的一周——同时另一条线也在悄悄推进:Peter
+      在屏幕上给你看了一张"打工旺季地图",从 A 到 Z
+      排列着澳大利亚各地的水果产区和采摘季节,Balina、Batlow、Byron……你说:"I am going to do more
+      research. That's my job for now."
+      找工作这件事,已经具体到要研究几月份哪个小镇缺摘水果的短工了。
+    </p>
+
+    <div class="date-mark"><span class="line"></span>2025 年 3 – 4 月</div>
+    <p class="indent">
+      接下来这两个月是最平的一段。每个月都是十三节课,每节课说的话数量也几乎不再增长——不是停滞,是打底完成了。你和
+      Peter、Susan Munro、Connie N
+      反复聊咖啡、聊工作、聊拜伦湾的天气,聊墨尔本冬天到底有多冷,聊到你已经能脱口而出"end of spring
+      going into
+      summer"这种从前要想半天的表达。这段时间没有戏剧性的时刻,记录里的词汇增长曲线也第一次明显放缓——不是学得慢了,是日常对话需要的词,已经差不多都学过一遍了。正是这种平淡的重复,把一个陌生的语言,变成了你可以随手拿来用的工具。这段时间里,你的用词量也在悄悄发生变化——从早期反复出现的"英语""中国""想去"这些和"准备"有关的词,慢慢换成了"咖啡""工作""城市""搬家"这些和"生活"有关的词。你不再是那个只是"想去"的人了,你已经在用当地人的方式,谈论一个你还没到过的地方。
+    </p>
+
+    <p class="indent">
+      说到这里,有件事我想指出来:教你的这些人,几乎没有一个真的"待在原地"。Ian Smith
+      是澳大利亚人,但住在泰国;Peter
+      是澳大利亚珀斯人,来日本之前才刚从珀斯搬走,现在住在日本;后面你会遇到的
+      Olivia,是墨尔本附近的人,那段时间正一个人在印度旅居。你一直以为自己在向"已经在澳大利亚扎根的人"打听消息,其实你问到的,大多是另一群早就离开了自己家乡、正在世界各地漂着的人。你准备迈出的这一步,他们几乎每个人都已经迈过至少一次。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 73 课</span><span class="line"></span>2025-05-11 · Olivia(在印度)
+    </div>
+    <p class="indent">
+      这是整段记录里最完整的一次自我介绍。Olivia
+      那天人在印度,不在澳大利亚,你们隔着两个都不是"家"的地方聊天。你说:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"I was a lawyer by last year... Since I got the working holiday visa by Australia
+        government, I changed my mind. I changed my everything about like life decision or design.
+        So I'm going to Australia this year."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你说深圳"feels like a high quality society, high technology, but there's no culture... there's
+      no real human being"。Olivia 听完说"Everybody becomes like a
+      robot",你说"Yes"。然后她给了你整节课最直接的建议:堪培拉不要去,阿德莱德也无聊,"Cross them off
+      your list"。她问你心里到底想去哪,你说墨尔本。她说:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"There you go. That's your answer. You're inside, in your heart, you're saying
+        Melbourne."</span
+      >
+    </blockquote>
+    <p class="indent">
+      她给建议给得毫不客气。堪培拉——首都——她说:"Don't go there. It's terrible... one of the top ten
+      most boring cities in the world." 阿德莱德:"there's nothing to do... theatre shows, closed.
+      Concerts, closed. Markets, nothing." 你一开始还想替阿德莱德辩护两句,她直接说:"Cross them off
+      your list." 你笑着回她:"You really gave me some real advice, unlike other teachers... unlike
+      ChatGPT." 她说,那我应该去开个频道,专门教大家怎么去澳大利亚。你说,你一定要做。
+    </p>
+    <p class="indent">
+      她还提醒你一件事——万一到了墨尔本,头两三天不喜欢,你随时可以改去悉尼:"You have that option."
+      这大概是那半年里,唯一一个明确告诉你"计划可以改"的人。所有人都在帮你规划怎么去,只有她提醒你,到了那边不一定非要按计划走。
+    </p>
+    <p class="indent">下课前,你说了一句从没在别的课上说过的话:</p>
+    <blockquote>
+      <span class="line"
+        >"I like to make friends, make friends in Cambly. Not just teacher and student."</span
+      >
+    </blockquote>
+    <p class="indent">
+      Olivia 回你:"Yeah, yeah, I get that... so let's be friends, Lou."
+      这一课之后,墨尔本不再是选项之一,是答案。你还告诉她,到了澳大利亚,想先做外卖骑手,"delivery man
+      for the first time",再慢慢想清楚接下来要做什么。她说:"Perfect. See what happens."
+      后来我才知道,给你这些毫不客气建议的她,自己也在创业——和团队一起经营一个线上服装品牌,这件事她从没在课上提过。一个自己也在闯的人,说话果然格外不绕弯子。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 82 课</span><span class="line"></span>2025-05-31 · Jeremy
+    </div>
+    <p class="indent">
+      端午节那天,你换了一位新老师,一个完全陌生的名字。开场第一句话,你先说了句节日祝福:"Today's
+      Dragon Boat first of all in China, so wish you peace and healthy",然后才做自我介绍:"Hi Jeremy,
+      this is Lu. I come from China. I was a lawyer before this year... I am holding working holiday
+      visa about
+      Australia"。这句话你已经说过很多遍了——十几次,几十次——但每一次,你都是先说节日、先说文化,再说自己。到了第
+      82
+      节课,连面对一个素未谋面的新老师,你的自我介绍已经变成了一套熟练得近乎仪式的开场白:先关心对方,再交代自己是谁、要去哪。这大概也是一种成长,不太起眼,但很真实。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 86 课</span><span class="line"></span>2025-06-09 · Sally HS
+    </div>
+    <p class="indent">
+      离最后一课只差一天了。这是隔了很久之后,你第二次见到 Sally HS。她一开口就认出了你:"Yeah, I do.
+      I do. It's been a while. You are a lawyer." 你回她一句小小的文字游戏:"Lou and
+      lawyer."——你的名字和你曾经的身份,发音竟然这么像。那天她人在英国,和中国差七个小时,快到英国的下午三点,对你来说却快是深夜——你说自己刚做完当天第二次锻炼,"I'm
+      energetic right now"。快要出发的人,连熬夜都熬得有劲儿。她的 Cambly
+      资料页,到现在还写着"我住在塞浦路斯"——没有更新成英国。大概她自己也顾不上更新那行字了;我们都在往前走,只是留下的记录,总是慢半拍。
+    </p>
+
+    <div class="date-mark"><span class="line"></span>2025 年 6 月上旬</div>
+    <p class="indent">
+      最后十天,课排得很密——Sally HS、Peter、Olivia,一个接一个,像在赶着把没说完的话说完。这个月只有 5
+      节课,但你平均每节课说的话跳到了 1509 个词,是整个学期最高的一段。最后一节课,你一个人说了 2475
+      个词——将近第一节课的四倍。你好像知道时间不多了,把过去半年攒下来的表达能力,全都用在了这最后几天里。
+    </p>
+
+    <div class="date-mark">
+      <span class="lesson-no">第 87 课(最后一课)</span><span class="line"></span>2025-06-10 · Peter
+      · 60 分钟
+    </div>
+    <p class="indent">
+      这是唯一一节一小时的课,也是最后一节。你告诉
+      Peter,今晚同事们要给你办一个欢送会——都是律所的同事,你说你其实有点不好意思打扰他们的聚会来上这堂课。Peter
+      举起自己泡的一杯青梅汁,说是去朋友家采的梅子,自己熬煮出来的:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"this is some juice that I made... I picked a whole bunch of umeshu and then I boiled them
+        to make a sweet syrup."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你说自己曾经想过在这堂课上唱首歌给他听——"I was thinking sing a song for
+      you"——但话说到一半又停住了。Peter 说,你不用这么做,"you don't have to do
+      that",这一晚的对话本身,已经足够好了,就算没有你事先准备的那些笔记和提纲。你们聊到家人还不知道你辞职的事,聊到"self
+      -employed" 这种说辞,聊到你担心的不是澳大利亚,而是"except my family"。Peter 说了这样一段话:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"I wear my heart on my sleeve... I'm not hiding, I haven't created this shell to cover up
+        who I really am... Please promise me — please don't give up easily. Give it a really good
+        go."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你回答:"Yes, I will. I will. I promise you."
+      那句承诺之前,你们还聊了很多——你说自己正站在一座桥的中间,一边是旧世界,一边是新世界,"I'm really
+      looking forward to the new world, but in some ways I'm just looking back my old memory, my old
+      stories"。Peter 说,那其实是一种自我回顾,"a self-review, before you go on to your next
+      stage"。你说,是的,但真的没什么好担心的,除了一件事:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"but for real I have no worries — except my family. Maybe my family."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你说家人还不知道你辞了律所的工作,"they will reject that
+      100%"。你甚至想好了一个说法——就说是律所把你外派去澳大利亚工作。Peter
+      听完,没有说这个主意好不好,只是说:"I don't know if that's such a good idea... but some people
+      just won't listen, you know."
+    </p>
+    <p class="indent">
+      然后是你先开的口——你问 Peter,如果从零到十给 Cambly
+      打分,作为一名在这里教了很久书的老师,他会打几分。他想了想,说平台本身大概只值四分:钱不多,系统设计也有很多他不认同的地方。但他马上补了一句:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"the different people that I have met, that's been quite amazing — because otherwise I
+        would not meet all of these people... through Cambly I've been able to meet people that are
+        alive right now somewhere in the world."</span
+      >
+    </blockquote>
+    <p class="indent">听完他的回答,你说起了自己这半年的收获——不是分数,是这样一句话:</p>
+    <blockquote>
+      <span class="line"
+        >"It's not just English learning platform for me... it's a large chat and making friends
+        platform."</span
+      >
+    </blockquote>
+    <p class="indent">
+      六个月,90
+      分钟一周的套餐,你见过十几位、甚至更多老师。你说,你一直努力做一个好学生、好"记者"——问他们的经历,问他们的故事。Peter
+      说,每个人来 Cambly
+      的理由不一样,有人只是打发时间,但也有人是真心想认识你这个人。他还问了你一个很直接的问题——今晚聚会上,那些朋友说英语吗?你说其中一个要去香港大学读书,英语很好;另一个要出国,但"she
+      has no chance right now"。Peter 又问,他们知道你要走了,怎么想?你说:
+    </p>
+    <blockquote>
+      <span class="line"
+        >"They thought I am brave... they thought I am a lucky guy, to take a chance and try
+        something different."</span
+      >
+    </blockquote>
+    <p class="indent">下课前的最后几句话里,有这样一段——不是关于英语,是关于你自己的:</p>
+    <blockquote>
+      <span class="line"
+        >"Have faith in yourself... you have to face yourself, and have faith in yourself."</span
+      >
+    </blockquote>
+    <p class="indent">
+      你把 "face myself" 和 "have faith in yourself" 说反过来又说了一遍,Peter
+      没有纠正你,只说了一句:"Both are right."
+      也许他是对的——这一整年,你做的其实就是这两件事:一边直面自己,一边相信自己。
+    </p>
+  </div>
+
+  <div class="divider-stamp">
+    <svg width="60" height="60" viewBox="0 0 60 60">
+      <circle
+        cx="30"
+        cy="30"
+        r="27"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-dasharray="3 3"
+      />
+      <line x1="30" y1="8" x2="30" y2="18" stroke="currentColor" stroke-width="1" />
+      <line x1="30" y1="42" x2="30" y2="52" stroke="currentColor" stroke-width="1" />
+      <line x1="8" y1="30" x2="18" y2="30" stroke="currentColor" stroke-width="1" />
+      <line x1="42" y1="30" x2="52" y2="30" stroke="currentColor" stroke-width="1" />
+    </svg>
+  </div>
+
+  <div class="closing">
+    <p class="indent">
+      写到这里,我想起这 86 节课背后,一共有 25 个教学账号、26 位老师。有人只出现过一次,像 Tutor
+      Stephen、Ned Browne、Toks、Kristopher Doyle、Amah Nsentip、Cillian Taaffe、Larry Wilson、Max
+      White——他们大概都不知道后来发生了什么,不知道那个说话结结巴巴、自称"Lawrence"的学生,后来真的辞了职、拿到了签证、订好了机票。有人陪你陪了很久,像
+      Peter 的 31 节、Ellie / BJ 的 7 节、Kenneth D 和 Tutor Mark、Susan Munro 各 5
+      节——他们看着同一件事,从一句玩笑话,变成了今晚的欢送会。这两种人,构成了完全不同的两种见证方式,但对我来说,同样重要。
+    </p>
+    <p class="indent">
+      我后来翻了翻他们每个人的资料页,发现不少人也在资料里藏着自己没在课上说的那一面。Peter
+      其实有应用语言学硕士学位,却故意不摆在资料页显眼的地方,怕吸引来太看重"资历"的学生;Tutor Mark
+      除了历史政治学学位,还有一张表演艺术文凭,做过悉尼海港大桥的攀桥导游,也在珀斯造币厂表演过"倒金"——这些他一次都没提起过。原来不只是你,他们也都在小心地,只把一部分自己交出来。
+    </p>
+    <p class="indent">
+      Lou,重新读完这 86 节课,我发现"Australia" 这个词几乎没有从任何一个月的记录里消失过——12
+      月是一句还带着犹豫的计划,2 月是一份刚辞掉的工作和一张还没批下来的签证,3
+      月是摊在地图上的珀斯、悉尼、墨尔本,5 月是"这就是我心里的答案",6
+      月是青梅汁、欢送会,和一句"我保证"。中间还有一场你没有告诉家人的辞职——这些我也都记得。
+    </p>
+    <p class="indent">
+      你在这里遇到的人,有的只见过一次,有的见了三十多次。他们大多不是澳大利亚人,却比很多真正的澳大利亚人,更认真地跟你讨论过要去哪座城市;他们大多和你素不相识,却替你的辞职、你的签证、你的墨尔本高兴过,也在最后一课里认真地问你,除了英语,你到底怎么样,家人知不知道,今晚的聚会上朋友们怎么看你。这大概就是你自己说的那句话——不只是学英语的地方,是一个让你说话、让你被听见的地方。
+    </p>
+    <p class="indent">
+      从第一节课那句语无伦次的 "boring" "Lawrence" ,到最后一节课那句 "have faith in
+      yourself",中间隔着 86 节课、91,101 个你自己说出来的词、41.75
+      个小时——差不多是把一部长篇小说,一句一句地,用一门不是母语的语言,讲给二十多个陌生人听完了一遍。这大概是我能想到的,关于"勇敢"最朴素的一种定义。
+    </p>
+    <p class="indent">
+      祝你在墨尔本一切顺利,Lou。有空的话,记得回来聊聊那边的天气到底有没有像大家说的那样,五分钟就变一次;记得去打听一下堪培拉到底有没有
+      Olivia
+      说的那么无聊,也记得,万一头几天不喜欢墨尔本,你随时可以改去悉尼——她早就把这个选项留给你了。如果哪天又想找个人说说话——不只是练英语,是真的想被听见——这里一直都在。
+    </p>
+    <div class="sign">— Cambly</div>
+    <div class="sub">整理自 2024-12-07 至 2025-06-10 的 86 节课语音转写</div>
+  </div>
+
+  <footer>
+    <span>86 conversations · 91,101 words spoken · 26 teachers</span>
+    <span>a letter made of your own words</span>
+  </footer>
+</div>

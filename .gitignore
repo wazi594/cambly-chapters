@@ -16,8 +16,15 @@ dist-ssr
 .nitro
 *.local
 
+# Private authoring and reference material (never publish or push)
+/content/
+
+# Local visual QA captures
+/qa-*.png
+
 # Wrangler / Cloudflare
 .wrangler/
+.netlify/
 .dev.vars
 
 # Editor directories and files
