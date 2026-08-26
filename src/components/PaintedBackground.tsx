@@ -157,8 +157,7 @@ export default function PaintedBackground() {
     let raf = 0;
     let lastFrame = 0;
     let visible = !document.hidden;
-    let scrolling = false;
-    let scrollTimer: number | undefined;
+    const touchDevice = window.matchMedia("(pointer: coarse) and (hover: none)").matches;
     const timer = new THREE.Timer();
     timer.connect(document);
     const tintVec = new THREE.Vector3();
@@ -166,7 +165,7 @@ export default function PaintedBackground() {
 
     const tick = (now: number) => {
       raf = 0;
-      if (!shouldRenderPaintFrame(lastFrame, now, visible, reduced, scrolling)) {
+      if (!shouldRenderPaintFrame(lastFrame, now, visible, reduced, touchDevice)) {
         if (visible && !reduced) raf = requestAnimationFrame(tick);
         return;
       }
@@ -200,16 +199,6 @@ export default function PaintedBackground() {
     };
     document.addEventListener("visibilitychange", onVisibility);
 
-    const onScroll = () => {
-      scrolling = true;
-      window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(() => {
-        scrolling = false;
-        lastFrame = 0;
-      }, 120);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
     if (reduced) renderer.render(scene, camera);
     else raf = requestAnimationFrame(tick);
 
@@ -217,9 +206,7 @@ export default function PaintedBackground() {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVisibility);
-      window.clearTimeout(scrollTimer);
       mesh.geometry.dispose();
       (mesh.material as THREE.Material).dispose();
       timer.dispose();
